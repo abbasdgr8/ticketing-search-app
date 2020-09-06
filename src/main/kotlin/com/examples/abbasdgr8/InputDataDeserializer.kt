@@ -1,31 +1,22 @@
 package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.model.Ticket
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import java.io.File
-import java.util.*
-import kotlin.collections.ArrayList
 
 class InputDataDeserializer {
     fun readTickets(jsonFile: File): List<Ticket> {
-        val tickets = ArrayList<Ticket>();
-        val ticket = Ticket(
-                "",
-                "",
-                "",
-                Date(),
-                "",
-                "",
-                "",
-                "",
-                "",
-                1,
-                1,
-                1,
-                ArrayList<String>(),
-                false,
-                Date(),
-                "");
-        tickets.add(ticket);
+
+        val jsonString = jsonFile.readText()
+
+        val gson = GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss X")
+                .create()
+
+        val ticketsType = object : TypeToken<ArrayList<Ticket>>() {}.type
+
+        val tickets = gson.fromJson<List<Ticket>>(jsonString, ticketsType)
 
         return tickets;
     }

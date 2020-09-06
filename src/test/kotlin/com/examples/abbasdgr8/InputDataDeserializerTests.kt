@@ -1,26 +1,30 @@
 package com.examples.abbasdgr8
 
-import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBe
+import com.examples.abbasdgr8.model.Ticket
+import org.amshove.kluent.shouldBeInstanceOf
+import org.amshove.kluent.shouldNotBeNull
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
+import java.io.File
 
 class InputDataDeserializerTests: Spek({
 
     Feature("Must be able to read JSON and deserialize tickets.json") {
 
-        Scenario("Read tickets.json input file") {
+        val ticketsFile = File("src/test/resources/json/tickets.json")
+        val d10r = InputDataDeserializer()
 
-            val ticketsFilePath = "src/test/resources/json/tickets.json"
-            lateinit var tickets: String
+        Scenario("Unmarshall tickets.json input data") {
+
+            lateinit var tickets: List<Ticket>
 
             When("deserializer invoked") {
-                val d10r = InputDataDeserializer()
-                tickets = d10r.readTickets(ticketsFilePath)
+                tickets = d10r.readTickets(ticketsFile)
             }
 
-            Then("JSON objects get unmarshalled successfully") {
-                tickets shouldNotBe null
+            Then("JSON objects get deserialized successfully") {
+                tickets.shouldNotBeNull()
+                tickets shouldBeInstanceOf List::class
             }
         }
     }

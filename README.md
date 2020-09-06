@@ -3,6 +3,7 @@ Implementation of a CLI application to search ticketing data and return results
 in a human readable format.
 
 ## Pre-Requisites
+- git on bash
 - JDK ==> 14
 - Gradle ==> 6+
 - Kotlin ==> 1.3+
@@ -26,6 +27,12 @@ $ ./gradlew clean test
 
 # Runs all Unit Tests in a specific test class
 $ ./gradlew clean test --tests fully.qualified.ClassName
+```
+
+## Usage
+```bash
+# Runs the main class (App.kt)
+$ ./gradlew run
 ```
 
 ## Notes

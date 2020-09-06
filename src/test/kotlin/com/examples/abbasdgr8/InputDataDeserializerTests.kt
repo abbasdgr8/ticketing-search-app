@@ -2,6 +2,7 @@ package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.model.Ticket
 import org.amshove.kluent.shouldBeInstanceOf
+import org.amshove.kluent.shouldNotBeEmpty
 import org.amshove.kluent.shouldNotBeNull
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -25,6 +26,11 @@ class InputDataDeserializerTests: Spek({
             Then("JSON objects get deserialized successfully") {
                 tickets.shouldNotBeNull()
                 tickets shouldBeInstanceOf List::class
+            }
+
+            Then("Returns List of Ticket model objects and is not empty") {
+                tickets.shouldNotBeEmpty()
+                tickets[0] shouldBeInstanceOf Ticket::class
             }
         }
     }

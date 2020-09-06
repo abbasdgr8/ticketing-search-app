@@ -5,6 +5,10 @@ import java.io.File
 
 class InputDataDeserializer {
     fun readTickets(jsonFile: File): List<Ticket> {
-        return ArrayList<Ticket>();
+        val tickets = ArrayList<Ticket>();
+        val ticket = Ticket();
+        tickets.add(ticket);
+
+        return tickets;
     }
 }

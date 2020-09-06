@@ -33,4 +33,4 @@ $ ./gradlew clean test --tests fully.qualified.ClassName
 - [ ] Add a plugin that calculates Test Coverage during build
 
 ### Assumptions
-- Assumption #1
+- [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/develop/src/test/resources/json) for arriving at the basic search functionality.

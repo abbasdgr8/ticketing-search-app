@@ -44,10 +44,10 @@ class InputDataDeserializerTests: Spek({
                 tickets[0].description shouldBeInstanceOf String::class
                 tickets[0].priority shouldBeInstanceOf String::class
                 tickets[0].status shouldBeInstanceOf String::class
-                tickets[0].submitter_id shouldBeInstanceOf Integer::class
-                tickets[0].assignee_id shouldBeInstanceOf Integer::class
-                tickets[0].organization_id shouldBeInstanceOf Integer::class
-                tickets[0].tags shouldBeInstanceOf Array<String>::class
+                tickets[0].submitter_id shouldBeInstanceOf Int::class
+                tickets[0].assignee_id shouldBeInstanceOf Int::class
+                tickets[0].organization_id shouldBeInstanceOf Int::class
+                tickets[0].tags shouldBeInstanceOf List::class
                 tickets[0].has_incidents shouldBeInstanceOf Boolean::class
                 tickets[0].due_at shouldBeInstanceOf Date::class
                 tickets[0].via shouldBeInstanceOf String::class

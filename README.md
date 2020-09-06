@@ -1,5 +1,5 @@
 # ticketing-search-app
-Implementation of a CLI application to search ticketing data and return results 
+Implementation of a (Kotlin) CLI application to search ticketing data and return results 
 in a human readable format.
 
 ## Pre-Requisites
@@ -28,6 +28,8 @@ $ ./gradlew clean test
 # Runs all Unit Tests in a specific test class
 $ ./gradlew clean test --tests fully.qualified.ClassName
 ```
+
+If you'd like to run tests independently in IntelliJ, you will need to install the [Spek Framework Plugin](https://plugins.jetbrains.com/plugin/10915-spek-framework)
 
 ## Usage
 ```bash

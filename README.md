@@ -43,3 +43,4 @@ $ ./gradlew run
 
 ### Assumptions
 - [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/develop/src/test/resources/json) for arriving at the basic search functionality.
+- [ ] It is possible that some of the given input data could be invalid and so there need to be cases to handle that scenario

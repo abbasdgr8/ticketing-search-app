@@ -2,6 +2,7 @@ package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.exception.InputDataDeserializationException
 import com.examples.abbasdgr8.model.Ticket
+import com.examples.abbasdgr8.model.User
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldNotBeEmpty
@@ -14,11 +15,11 @@ import java.util.*
 
 class InputDataDeserializerTests: Spek({
 
-    Feature("Must be able to read and deserialize tickets.json") {
+    val deserializer = InputDataDeserializer()
 
-        val deserializer = InputDataDeserializer()
+    Feature("Read and deserialize tickets.json") {
 
-        Scenario("Unmarshall valid tickets.json input data") {
+        Scenario("Unmarshal valid tickets.json input data") {
 
             val validTicketsFile = File("src/test/resources/json/tickets.json")
             lateinit var tickets: List<Ticket>
@@ -80,7 +81,7 @@ class InputDataDeserializerTests: Spek({
             }
         }
 
-        Scenario("Unmarshall invalid tickets JSON input data") {
+        Scenario("Unmarshal invalid tickets JSON input data") {
 
             val invalidTicketsFile = File("src/test/resources/json/invalid/tickets.json")
             lateinit var exception: Exception
@@ -88,6 +89,98 @@ class InputDataDeserializerTests: Spek({
             When("deserializer invoked") {
                 try {
                     deserializer.readTickets(invalidTicketsFile)
+                } catch (e: Exception) {
+                    exception = e
+                }
+            }
+
+            Then("JSON objects deserialization throws exception") {
+                exception.shouldNotBeNull()
+                exception shouldBeInstanceOf InputDataDeserializationException::class
+            }
+        }
+    }
+
+
+
+    Feature("Read and deserialize users.json") {
+
+        Scenario("Unmarshal valid users.json input data") {
+
+            val validUsersFile = File("src/test/resources/json/users.json")
+            lateinit var users: List<User>
+            lateinit var user: User
+
+            When("deserializer invoked") {
+                users = deserializer.readUsers(validUsersFile)
+            }
+
+            Then("JSON objects get deserialized successfully") {
+                users.shouldNotBeNull()
+                users shouldBeInstanceOf List::class
+            }
+
+            Then("Returns List of User model objects, and is not empty") {
+                users.shouldNotBeEmpty()
+                users.size shouldBeEqualTo 75
+
+                user = users[0]
+                user shouldBeInstanceOf User::class
+            }
+
+            Then("All properties of User object should have expected types") {
+                user._id shouldBeInstanceOf Int::class
+                user.url shouldBeInstanceOf String::class
+                user.external_id shouldBeInstanceOf String::class
+                user.name shouldBeInstanceOf String::class
+                user.alias shouldBeInstanceOf String::class
+                user.created_at shouldBeInstanceOf Date::class
+                user.active shouldBeInstanceOf Boolean::class
+                user.verified shouldBeInstanceOf Boolean::class
+                user.shared shouldBeInstanceOf Boolean::class
+                user.locale shouldBeInstanceOf String::class
+                user.timezone shouldBeInstanceOf String::class
+                user.last_login_at shouldBeInstanceOf Date::class
+                user.email shouldBeInstanceOf String::class
+                user.phone shouldBeInstanceOf String::class
+                user.signature shouldBeInstanceOf String::class
+                user.organization_id shouldBeInstanceOf Int::class
+                user.tags shouldBeInstanceOf List::class
+                user.suspended shouldBeInstanceOf Boolean::class
+                user.role shouldBeInstanceOf String::class
+            }
+
+            Then("All properties of User object should have expected values") {
+                user._id shouldBeEqualTo 1
+                user.url shouldBeEqualTo "http://initech.zendesk.com/api/v2/users/1.json"
+                user.external_id shouldBeEqualTo "74341f74-9c79-49d5-9611-87ef9b6eb75f"
+                user.name shouldBeEqualTo "Francisca Rasmussen"
+                user.alias shouldBeEqualTo "Miss Coffey"
+                user.created_at.toString() shouldBeEqualTo "Sat Apr 16 01:19:46 AEST 2016"
+                user.active shouldBeEqualTo true
+                user.verified shouldBeEqualTo true
+                user.shared shouldBeEqualTo false
+                user.locale shouldBeEqualTo "en-AU"
+                user.timezone shouldBeEqualTo "Sri Lanka"
+                user.last_login_at.toString() shouldBeEqualTo "Sun Aug 04 21:03:27 AEST 2013"
+                user.email shouldBeEqualTo "coffeyrasmussen@flotonic.com"
+                user.phone shouldBeEqualTo "8335-422-718"
+                user.signature shouldBeEqualTo "Don't Worry Be Happy!"
+                user.organization_id shouldBeEqualTo 119
+                user.tags shouldBeEqualTo listOf("Springville", "Sutton", "Hartsville/Hartley", "Diaperville")
+                user.suspended shouldBeEqualTo true
+                user.role shouldBeEqualTo "admin"
+            }
+        }
+
+        Scenario("Unmarshal invalid users JSON input data") {
+
+            val invalidUsersFile = File("src/test/resources/json/invalid/users.json")
+            lateinit var exception: Exception
+
+            When("deserializer invoked") {
+                try {
+                    deserializer.readUsers(invalidUsersFile)
                 } catch (e: Exception) {
                     exception = e
                 }

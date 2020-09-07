@@ -19,14 +19,33 @@ dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
+    compile 'com.google.code.gson:gson:2.8.5'
+
+    // Kluent library for test assertions
+    testCompile 'org.amshove.kluent:kluent:1.61'
+
     // Use the Kotlin test library.
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 
     // Use the Kotlin JUnit integration.
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+
+    // Dependencies for Spek BDD
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:2.0.9"
+    testRuntimeOnly "org.spekframework.spek2:spek-runner-junit5:2.0.9"
+
+    // spek requires kotlin-reflect
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect"
 }
 
 application {
     // Define the main class for the application.
     mainClassName = 'com.examples.abbasdgr8.AppKt'
+}
+
+// setup the test task
+test {
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
 }

@@ -1,9 +1,8 @@
-package com.examples.abbasdgr8
+package com.examples.abbasdgr8.model.data
 
-import com.examples.abbasdgr8.exception.InputDataDeserializationException
-import com.examples.abbasdgr8.model.Organization
-import com.examples.abbasdgr8.model.Ticket
-import com.examples.abbasdgr8.model.User
+import com.examples.abbasdgr8.model.domain.Organization
+import com.examples.abbasdgr8.model.domain.Ticket
+import com.examples.abbasdgr8.model.domain.User
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldNotBeEmpty

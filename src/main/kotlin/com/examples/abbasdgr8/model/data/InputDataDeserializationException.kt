@@ -1,4 +1,4 @@
-package com.examples.abbasdgr8.exception
+package com.examples.abbasdgr8.model.data
 
 import java.lang.Exception
 

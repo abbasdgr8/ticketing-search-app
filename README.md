@@ -2,6 +2,9 @@
 Implementation of a (Kotlin) CLI application to search ticketing data and return results 
 in a human readable format.
 
+In order to standardise feature development and ensure separation of concerns, this has been
+developed as a Model-View-Controller application.
+
 ## Pre-Requisites
 - git on bash
 - JDK ==> 14
@@ -43,6 +46,6 @@ $ ./gradlew run
 - [ ] Add a plugin that calculates Test Coverage during build
 
 ### Assumptions
-- [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/develop/src/test/resources/json) for arriving at the basic search functionality.
+- [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/master/src/test/resources/json) for arriving at the basic search functionality.
 - [ ] It is possible that some of the given input data could be invalid and so there need to be cases to handle that scenario
 - [ ] All input data would be of size that could be easily loaded into the JVM memory; thereby eliminating the need of data persistence.

@@ -1,4 +1,4 @@
-package com.examples.abbasdgr8.model
+package com.examples.abbasdgr8.model.domain
 
 import java.util.*
 

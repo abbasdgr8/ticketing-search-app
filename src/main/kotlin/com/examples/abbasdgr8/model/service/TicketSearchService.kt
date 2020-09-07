@@ -6,13 +6,15 @@ import java.io.File
 
 class TicketSearchService {
 
+    private val ticketsRepository = InputDataDeserializer()
+                                    .readTickets(File("src/main/resources/input-data/tickets.json"))
+
     fun findById(id: String): Ticket? {
+        return ticketsRepository.singleOrNull { t -> t._id == id }
+    }
 
-        val deserializer = InputDataDeserializer()
-        val tickets = deserializer.readTickets(File("src/main/resources/input-data/tickets.json"))
-
-        return tickets.singleOrNull { t -> t._id == id }
-
+    fun findByAssigneeId(assigneeId: Int): List<Ticket> {
+        return ticketsRepository.filter { ticket -> ticket.assignee_id == assigneeId }
     }
 
 }

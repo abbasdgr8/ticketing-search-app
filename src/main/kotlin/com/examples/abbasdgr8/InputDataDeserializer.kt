@@ -1,6 +1,7 @@
 package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.exception.InputDataDeserializationException
+import com.examples.abbasdgr8.model.Organization
 import com.examples.abbasdgr8.model.Ticket
 import com.examples.abbasdgr8.model.User
 import com.google.gson.GsonBuilder
@@ -42,6 +43,21 @@ class InputDataDeserializer {
         }
 
         return users;
+    }
+
+    @Throws(InputDataDeserializationException::class)
+    fun readOrganizations(jsonFile: File): List<Organization> {
+
+        val orgs: List<Organization>
+        val orgsType = object : TypeToken<ArrayList<Organization>>() {}.type
+
+        try {
+            orgs = gson.fromJson<List<Organization>>(jsonFile.readText(), orgsType)
+        } catch (e: Exception) {
+            throw InputDataDeserializationException(e.message, e.cause)
+        }
+
+        return orgs;
     }
 
 }

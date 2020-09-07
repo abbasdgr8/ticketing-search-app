@@ -1,6 +1,7 @@
 package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.exception.InputDataDeserializationException
+import com.examples.abbasdgr8.model.Organization
 import com.examples.abbasdgr8.model.Ticket
 import com.examples.abbasdgr8.model.User
 import org.amshove.kluent.shouldBeEqualTo
@@ -21,7 +22,7 @@ class InputDataDeserializerTests: Spek({
 
         Scenario("Unmarshal valid tickets.json input data") {
 
-            val validTicketsFile = File("src/test/resources/json/tickets.json")
+            val validTicketsFile = File("src/test/resources/json/valid/tickets.json")
             lateinit var tickets: List<Ticket>
             lateinit var ticket: Ticket
 
@@ -36,7 +37,7 @@ class InputDataDeserializerTests: Spek({
 
             Then("Returns List of Ticket model objects, and is not empty") {
                 tickets.shouldNotBeEmpty()
-                tickets.size shouldBeEqualTo 200
+                tickets.size shouldBeEqualTo 1
 
                 ticket = tickets[0]
                 ticket shouldBeInstanceOf Ticket::class
@@ -107,7 +108,7 @@ class InputDataDeserializerTests: Spek({
 
         Scenario("Unmarshal valid users.json input data") {
 
-            val validUsersFile = File("src/test/resources/json/users.json")
+            val validUsersFile = File("src/test/resources/json/valid/users.json")
             lateinit var users: List<User>
             lateinit var user: User
 
@@ -122,7 +123,7 @@ class InputDataDeserializerTests: Spek({
 
             Then("Returns List of User model objects, and is not empty") {
                 users.shouldNotBeEmpty()
-                users.size shouldBeEqualTo 75
+                users.size shouldBeEqualTo 1
 
                 user = users[0]
                 user shouldBeInstanceOf User::class
@@ -181,6 +182,78 @@ class InputDataDeserializerTests: Spek({
             When("deserializer invoked") {
                 try {
                     deserializer.readUsers(invalidUsersFile)
+                } catch (e: Exception) {
+                    exception = e
+                }
+            }
+
+            Then("JSON objects deserialization throws exception") {
+                exception.shouldNotBeNull()
+                exception shouldBeInstanceOf InputDataDeserializationException::class
+            }
+        }
+    }
+
+
+
+    Feature("Read and deserialize organizations JSON") {
+
+        Scenario("Unmarshal valid organizations.json input data") {
+
+            val validOrgFile = File("src/test/resources/json/valid/organizations.json")
+            lateinit var organizations: List<Organization>
+            lateinit var organization: Organization
+
+            When("deserializer invoked") {
+                organizations = deserializer.readOrganizations(validOrgFile)
+            }
+
+            Then("JSON objects get deserialized successfully") {
+                organizations.shouldNotBeNull()
+                organizations shouldBeInstanceOf List::class
+            }
+
+            Then("Returns List of Organization model objects, and is not empty") {
+                organizations.shouldNotBeEmpty()
+                organizations.size shouldBeEqualTo 1
+
+                organization = organizations[0]
+                organization shouldBeInstanceOf Organization::class
+            }
+
+            Then("All properties of Organization object should have expected types") {
+                organization._id shouldBeInstanceOf Int::class
+                organization.url shouldBeInstanceOf String::class
+                organization.external_id shouldBeInstanceOf String::class
+                organization.name shouldBeInstanceOf String::class
+                organization.domain_names shouldBeInstanceOf List::class
+                organization.created_at shouldBeInstanceOf Date::class
+                organization.details shouldBeInstanceOf String::class
+                organization.shared_tickets shouldBeInstanceOf Boolean::class
+                organization.tags shouldBeInstanceOf List::class
+            }
+
+            Then("All properties of Organization object should have expected values") {
+                organization._id shouldBeEqualTo 101
+                organization.url shouldBeEqualTo "http://initech.zendesk.com/api/v2/organizations/101.json"
+                organization.external_id shouldBeEqualTo "9270ed79-35eb-4a38-a46f-35725197ea8d"
+                organization.name shouldBeEqualTo "Enthaze"
+                organization.domain_names shouldBeEqualTo listOf("kage.com", "ecratic.com", "endipin.com", "zentix.com")
+                organization.created_at.toString() shouldBeEqualTo "Sun May 22 07:10:28 AEST 2016"
+                organization.details shouldBeEqualTo "MegaCorp"
+                organization.shared_tickets shouldBeEqualTo false
+                organization.tags shouldBeEqualTo listOf("Fulton", "West", "Rodriguez", "Farley")
+            }
+        }
+
+        Scenario("Unmarshal invalid organizations JSON input data") {
+
+            val invalidOrgFile = File("src/test/resources/json/invalid/organizations.json")
+            lateinit var exception: Exception
+
+            When("deserializer invoked") {
+                try {
+                    deserializer.readOrganizations(invalidOrgFile)
                 } catch (e: Exception) {
                     exception = e
                 }

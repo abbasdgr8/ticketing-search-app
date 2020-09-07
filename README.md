@@ -29,7 +29,7 @@ $ ./gradlew clean test
 $ ./gradlew clean test --tests fully.qualified.ClassName
 ```
 
-If you'd like to run tests independently in IntelliJ, you will need to install the [Spek Framework Plugin](https://plugins.jetbrains.com/plugin/10915-spek-framework)
+If you'd like to run and modify tests independently in IntelliJ, you need to install the [Spek Framework Plugin](https://plugins.jetbrains.com/plugin/10915-spek-framework)
 
 ## Usage
 ```bash
@@ -39,8 +39,10 @@ $ ./gradlew run
 
 ## Notes
 ### Tech Debt / TODOs
+- [ ] Add build and code coverage badges to repo
 - [ ] Add a plugin that calculates Test Coverage during build
 
 ### Assumptions
 - [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/develop/src/test/resources/json) for arriving at the basic search functionality.
 - [ ] It is possible that some of the given input data could be invalid and so there need to be cases to handle that scenario
+- [ ] All input data would be of size that could be easily loaded into the JVM memory; thereby eliminating the need of data persistence.

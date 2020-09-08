@@ -1,5 +1,5 @@
 language: java
-
+install: skip
 jdk:
   - oraclejdk14
 
@@ -11,7 +11,7 @@ cache:
     - $HOME/.gradle
 
 before_install:
-  - chmod +x gradlew
+  - chmod +x ./gradlew
 
 script:
   - ./gradlew clean install

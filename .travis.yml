@@ -1,0 +1,18 @@
+language: java
+install: skip
+jdk:
+  - oraclejdk14
+
+os:
+  - linux
+
+cache:
+  directories:
+    - $HOME/.gradle
+
+before_install:
+  - chmod +x ./gradlew
+
+script:
+  - ./gradlew clean install
+  - ./gradlew clean test

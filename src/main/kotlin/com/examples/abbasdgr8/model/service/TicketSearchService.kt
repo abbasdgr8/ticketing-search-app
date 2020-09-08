@@ -15,7 +15,7 @@ class TicketSearchService : SearchService() {
 
         try {
             field = searchableFields.first { it.name == fieldName }
-            resultSet = tickets.filter { field.get(it) == fieldValue }    // Decouple search logic from here
+            resultSet = executeSearch(field, fieldValue)
         } catch (e: Exception) {
             throw TicketSearchError(e)
         }
@@ -27,6 +27,9 @@ class TicketSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
+    private fun <T> executeSearch(field: KProperty1<Ticket, *>, fieldValue: T): List<Ticket> {
+        return tickets.filter { field.get(it) == fieldValue }
+    }
 
     companion object {
         private val searchableFields: Collection<KProperty1<Ticket, *>>

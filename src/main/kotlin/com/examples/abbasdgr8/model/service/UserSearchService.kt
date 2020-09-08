@@ -15,7 +15,7 @@ class UserSearchService : SearchService() {
 
         try {
             field = searchableFields.first { it.name == fieldName }
-            resultSet = users.filter { field.get(it) == fieldValue }
+            resultSet = executeSearch(field, fieldValue)
         } catch (e: Exception) {
             throw UserSearchError(e)
         }
@@ -27,6 +27,9 @@ class UserSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
+    private fun <T> executeSearch(field: KProperty1<User, *>, fieldValue: T): List<User> {
+        return users.filter { field.get(it) == fieldValue }
+    }
 
     companion object {
         private val searchableFields: Collection<KProperty1<User, *>>

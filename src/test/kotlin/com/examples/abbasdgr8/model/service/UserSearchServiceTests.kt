@@ -1,6 +1,7 @@
 package com.examples.abbasdgr8.model.service
 
 import com.examples.abbasdgr8.model.domain.User
+import com.examples.abbasdgr8.model.service.exceptions.UserSearchError
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature

@@ -1,16 +1,12 @@
 package com.examples.abbasdgr8.model.service
 
-import com.examples.abbasdgr8.model.data.InputDataDeserializer
 import com.examples.abbasdgr8.model.domain.User
-import java.io.File
+import com.examples.abbasdgr8.model.service.exceptions.UserSearchError
 import java.lang.Exception
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
-class UserSearchService {
-
-    private val usersRepository = InputDataDeserializer()
-                                    .readUsers(File("src/main/resources/input-data/users.json"))
+class UserSearchService : SearchService() {
 
     @Throws(UserSearchError::class)
     fun <T> findByField(fieldName: String, fieldValue: T): List<User> {
@@ -19,7 +15,7 @@ class UserSearchService {
 
         try {
             field = searchableFields.first { it.name == fieldName }
-            resultSet = usersRepository.filter { field.get(it) == fieldValue }    // Decouple search logic from here
+            resultSet = users.filter { field.get(it) == fieldValue }
         } catch (e: Exception) {
             throw UserSearchError(e)
         }
@@ -28,7 +24,7 @@ class UserSearchService {
     }
 
     fun getAllSearchableFieldNames(): List<String> {
-        return searchableFields.mapTo(ArrayList()) { it.name }
+        return super.getAllSearchableFieldNames(searchableFields)
     }
 
 

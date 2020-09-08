@@ -1,4 +1,4 @@
-package com.examples.abbasdgr8.model.service
+package com.examples.abbasdgr8.model.service.exceptions
 
 import java.lang.Exception
 

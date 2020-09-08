@@ -2,6 +2,7 @@ package com.examples.abbasdgr8.model.service
 
 import com.examples.abbasdgr8.model.data.InputDataDeserializer
 import com.examples.abbasdgr8.model.domain.Ticket
+import com.examples.abbasdgr8.model.service.exceptions.TicketSearchError
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -12,29 +13,6 @@ import java.util.NoSuchElementException
 class TicketSearchServiceTests: Spek({
 
     val service = TicketSearchService()
-
-
-    Feature("Searching on a field that does not exist") {
-
-        Scenario("Seaching on field with name xyz") {
-
-            lateinit var exception: Exception
-
-            When("findByField() using xyz gets invoked") {
-                try{
-                    service.findByField("xyz", "random value")
-                } catch (e: Exception) {
-                    exception = e
-                }
-            }
-
-            Then("") {
-                exception.shouldNotBeNull()
-                exception shouldBeInstanceOf TicketSearchError::class
-                exception.cause shouldBeInstanceOf NoSuchElementException::class
-            }
-        }
-    }
 
 
     Feature("Searching on _id") {
@@ -134,6 +112,29 @@ class TicketSearchServiceTests: Spek({
 
             Then("No record gets returned") {
                 results.shouldBeEmpty()
+            }
+        }
+    }
+
+
+    Feature("Searching on a field that does not exist") {
+
+        Scenario("Seaching on field with name xyz") {
+
+            lateinit var exception: Exception
+
+            When("findByField() using xyz gets invoked") {
+                try{
+                    service.findByField("xyz", "random value")
+                } catch (e: Exception) {
+                    exception = e
+                }
+            }
+
+            Then("A TicketSearchError gets thrown") {
+                exception.shouldNotBeNull()
+                exception shouldBeInstanceOf TicketSearchError::class
+                exception.cause shouldBeInstanceOf NoSuchElementException::class
             }
         }
     }

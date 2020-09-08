@@ -1,10 +1,14 @@
 language: java
-install: skip
+
 jdk:
   - oraclejdk14
 
 os:
   - linux
+
+branches:
+  only:
+    - master
 
 cache:
   directories:

@@ -1,0 +1,15 @@
+language: java
+
+jdk:
+  - oraclejdk14
+
+os:
+  - linux
+
+cache:
+  directories:
+    - $HOME/.gradle
+
+script:
+  - ./gradlew clean install
+  - ./gradlew clean test

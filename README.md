@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/abbasdgr8/ticketing-search-app.svg?token=sVudbeziXANtkqKLaFRM&branch=master)](https://travis-ci.com/abbasdgr8/ticketing-search-app)
+
 # ticketing-search-app
 Implementation of a (Kotlin) CLI application to search ticketing data and return results 
 in a human readable format.

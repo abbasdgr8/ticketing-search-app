@@ -12,7 +12,7 @@ class TicketSearchService {
     private val ticketsRepository = InputDataDeserializer()
                                     .readTickets(File("src/main/resources/input-data/tickets.json"))
 
-    @Throws(TicketSearchException::class)
+    @Throws(TicketSearchError::class)
     fun <T> findByField(fieldName: String, fieldValue: T): List<Ticket> {
         val resultSet: List<Ticket>
         val field: KProperty1<Ticket, *>
@@ -21,7 +21,7 @@ class TicketSearchService {
             field = searchableFields.first { it.name == fieldName }
             resultSet = ticketsRepository.filter { field.get(it) == fieldValue }    // Decouple search logic from here
         } catch (e: Exception) {
-            throw TicketSearchException(e)
+            throw TicketSearchError(e)
         }
 
         return resultSet

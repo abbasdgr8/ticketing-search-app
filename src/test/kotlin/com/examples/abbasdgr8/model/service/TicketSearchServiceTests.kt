@@ -30,7 +30,7 @@ class TicketSearchServiceTests: Spek({
 
             Then("") {
                 exception.shouldNotBeNull()
-                exception shouldBeInstanceOf TicketSearchException::class
+                exception shouldBeInstanceOf TicketSearchError::class
                 exception.cause shouldBeInstanceOf NoSuchElementException::class
             }
         }

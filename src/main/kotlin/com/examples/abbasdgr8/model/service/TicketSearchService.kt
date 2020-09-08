@@ -17,14 +17,25 @@ class TicketSearchService {
         val resultSet: List<Ticket>
         val field: KProperty1<Ticket, *>
 
-        val fields = Ticket::class.memberProperties
         try {
-            field = fields.first { it.name == fieldName }
+            field = searchableFields.first { it.name == fieldName }
             resultSet = ticketsRepository.filter { field.get(it) == fieldValue }    // Decouple search logic from here
         } catch (e: Exception) {
             throw TicketSearchException(e)
         }
 
         return resultSet
+    }
+
+    fun getAllSearchableFieldNames(): List<String> {
+        return searchableFields.mapTo(ArrayList()) { it.name }
+    }
+
+
+    companion object {
+        private val searchableFields: Collection<KProperty1<Ticket, *>>
+            get() {
+                return Ticket::class.memberProperties
+            }
     }
 }

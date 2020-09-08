@@ -104,4 +104,76 @@ class TicketSearchServiceTests: Spek({
             }
         }
     }
+
+
+    Feature("Searching on subject") {
+
+        Scenario("Searching on subject for existing records") {
+
+            val subject = "A Catastrophe in Korea (North)"
+            lateinit var results: List<Ticket>
+
+            When("Search by subject is invoked") {
+                results = service.findByField("subject", subject)
+            }
+
+            Then("Multiple records get returned") {
+                results.shouldNotBeNull()
+                results.size shouldBeEqualTo 1
+            }
+        }
+
+        Scenario("Searching on subject for non existent records") {
+
+            val subject = "Random string"
+            lateinit var results: List<Ticket>
+
+            When("Search by subject is invoked") {
+                results = service.findByField("subject", subject)
+            }
+
+            Then("No record gets returned") {
+                results.shouldBeEmpty()
+            }
+        }
+    }
+
+
+    Feature("List all searchable fields") {
+
+        val expectedFields = listOf(
+                                "_id",
+                                "assignee_id",
+                                "created_at",
+                                "description",
+                                "due_at",
+                                "external_id",
+                                "has_incidents",
+                                "organization_id",
+                                "priority",
+                                "status",
+                                "subject",
+                                "submitter_id",
+                                "tags",
+                                "type",
+                                "url",
+                                "via"
+                            )
+
+        Scenario("On Ticket object") {
+
+            lateinit var searchableFields: List<String>
+
+            When("listAllSearchableFields is called") {
+                searchableFields = service.getAllSearchableFieldNames()
+            }
+
+            Then("all correct searchable fields are returned") {
+                searchableFields shouldBeEqualTo expectedFields
+            }
+
+        }
+
+    }
+
 })

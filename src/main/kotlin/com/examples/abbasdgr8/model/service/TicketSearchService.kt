@@ -3,6 +3,8 @@ package com.examples.abbasdgr8.model.service
 import com.examples.abbasdgr8.model.data.InputDataDeserializer
 import com.examples.abbasdgr8.model.domain.Ticket
 import java.io.File
+import java.lang.Exception
+import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
 class TicketSearchService {
@@ -10,11 +12,19 @@ class TicketSearchService {
     private val ticketsRepository = InputDataDeserializer()
                                     .readTickets(File("src/main/resources/input-data/tickets.json"))
 
+    @Throws(TicketSearchException::class)
     fun <T> findByField(fieldName: String, fieldValue: T): List<Ticket> {
+        val resultSet: List<Ticket>
+        val field: KProperty1<Ticket, *>
+
         val fields = Ticket::class.memberProperties
-        val field = fields.first { it.name == fieldName }
+        try {
+            field = fields.first { it.name == fieldName }
+            resultSet = ticketsRepository.filter { field.get(it) == fieldValue }    // Decouple search logic from here
+        } catch (e: Exception) {
+            throw TicketSearchException(e)
+        }
 
-        return ticketsRepository.filter { field.get(it) == fieldValue }
+        return resultSet
     }
-
 }

@@ -30,7 +30,7 @@ class InputDataDeserializer {
             try {
                 objects = gson.fromJson<ArrayList<T>>(jsonFile.readText(), type)
             } catch (e: Exception) {
-                throw InputDataDeserializationException(e.message, e.cause)
+                throw InputDataDeserializationException(e)
             }
 
             return objects

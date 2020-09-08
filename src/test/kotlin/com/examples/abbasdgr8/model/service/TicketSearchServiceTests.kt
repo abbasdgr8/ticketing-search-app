@@ -6,10 +6,36 @@ import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import java.io.File
+import java.lang.Exception
+import java.util.NoSuchElementException
 
 class TicketSearchServiceTests: Spek({
 
     val service = TicketSearchService()
+
+
+    Feature("Searching on a field that does not exist") {
+
+        Scenario("Seaching on field with name xyz") {
+
+            lateinit var exception: Exception
+
+            When("findByField() using xyz gets invoked") {
+                try{
+                    service.findByField("xyz", "random value")
+                } catch (e: Exception) {
+                    exception = e
+                }
+            }
+
+            Then("") {
+                exception.shouldNotBeNull()
+                exception shouldBeInstanceOf TicketSearchException::class
+                exception.cause shouldBeInstanceOf NoSuchElementException::class
+            }
+        }
+    }
+
 
     Feature("Searching on _id") {
 
@@ -77,7 +103,5 @@ class TicketSearchServiceTests: Spek({
                 results.shouldBeEmpty()
             }
         }
-
     }
-
 })

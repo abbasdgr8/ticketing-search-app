@@ -14,21 +14,24 @@ class TicketsView {
         fun getTicketsFields(fields: List<String>): String {
             val sb = StringBuilder()
             fields.forEach {field ->
-                sb.append("\n")
+                sb.append(System.lineSeparator())
                 sb.append(field)
             }
+            sb.append(System.lineSeparator())
+            sb.append(System.lineSeparator())
             return ticketsFields + sb.toString()
         }
 
         fun getTicketRecord(tickets: List<Ticket>): String {
             val sb = StringBuilder()
             tickets.forEach { ticket ->
-                sb.append("\n")
+                sb.append(System.lineSeparator())
                 sb.append(ticket.toString())
-                sb.append("\n")
+                sb.append(System.lineSeparator())
             }
-            sb.append("\n")
+            sb.append(System.lineSeparator())
             sb.append("Found ${tickets.size} results")
+            sb.append(System.lineSeparator())
 
             return sb.toString()
         }

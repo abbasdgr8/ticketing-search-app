@@ -8,11 +8,9 @@ import com.examples.abbasdgr8.model.service.TicketSearchService
 import com.examples.abbasdgr8.model.service.UserSearchService
 import kotlin.system.exitProcess
 
-open class SearchController {
-
-    protected val ticketSearchService: TicketSearchService
-    protected val userSearchService: UserSearchService
-    protected val orgSearchService: OrganizationSearchService
+open class SearchController(protected val ticketSearchService: TicketSearchService,
+                            protected val userSearchService: UserSearchService,
+                            protected val orgSearchService: OrganizationSearchService) {
 
     protected val stateMachine = AppStateMachine().stateMachine
 
@@ -76,17 +74,4 @@ open class SearchController {
         }
     }
 
-    constructor() {
-        this.ticketSearchService = TicketSearchService()
-        this.userSearchService = UserSearchService()
-        this.orgSearchService = OrganizationSearchService()
-    }
-
-    constructor(ticketSearchService: TicketSearchService,
-                userSearchService: UserSearchService,
-                orgSearchService: OrganizationSearchService) {
-        this.ticketSearchService = ticketSearchService
-        this.userSearchService = userSearchService
-        this.orgSearchService = orgSearchService
-    }
 }

@@ -51,11 +51,11 @@ This application was developed and tested on a MacOS Catalina. Therefore, there 
 be behavioural differences on how the CLI app runs on a different OS
 
 ### Tech Debt / TODOs
-- [ ] Add build and code coverage badges to repo
 - [ ] Current functionality only has search without indexing. Explore other indexing options for future enhancements.
 - [ ] Clean up and beautify CLI views that get displayed to the end user. Perhaps evaluate CLI libraries like Clikt
-- [ ] Add more tests for Controllers
 - [ ] Add search support for other datatypes like date, and array
+- [ ] Add more tests for Controllers
+- [ ] Add build and code coverage badges to repo
 
 ### Assumptions
 - [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/master/src/main/resources/input-data) for arriving at the basic search functionality.

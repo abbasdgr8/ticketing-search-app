@@ -57,7 +57,14 @@ class UserSearchService : SearchService() {
     companion object {
         private val searchableFields: Collection<KProperty1<User, *>>
             get() {
-                return User::class.memberProperties
+                return User::class.memberProperties.filter {
+                    when(it.returnType.toString()) {
+                        // Exclude fields with these types since search on them is not yet supported
+                        "java.util.Date" -> false
+                        "kotlin.collections.List<kotlin.String>" -> false
+                        else -> true
+                    }
+                }
             }
     }
 }

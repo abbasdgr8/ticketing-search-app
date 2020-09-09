@@ -145,9 +145,7 @@ class TicketSearchServiceTests: Spek({
         val expectedFields = listOf(
                                 "_id",
                                 "assignee_id",
-                                "created_at",
                                 "description",
-                                "due_at",
                                 "external_id",
                                 "has_incidents",
                                 "organization_id",
@@ -155,7 +153,6 @@ class TicketSearchServiceTests: Spek({
                                 "status",
                                 "subject",
                                 "submitter_id",
-                                "tags",
                                 "type",
                                 "url",
                                 "via"

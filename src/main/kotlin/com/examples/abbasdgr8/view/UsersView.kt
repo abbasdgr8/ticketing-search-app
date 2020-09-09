@@ -14,21 +14,24 @@ class UsersView {
         fun getUsersFields(fields: List<String>): String {
             val sb = StringBuilder()
             fields.forEach {field ->
-                sb.append("\n")
+                sb.append(System.lineSeparator())
                 sb.append(field)
             }
+            sb.append(System.lineSeparator())
+            sb.append(System.lineSeparator())
             return usersFields + sb.toString()
         }
 
         fun getUserRecord(users: List<User>): String {
             val sb = StringBuilder()
             users.forEach { user ->
-                sb.append("\n")
+                sb.append(System.lineSeparator())
                 sb.append(user.toString())
-                sb.append("\n")
+                sb.append(System.lineSeparator())
             }
-            sb.append("\n")
+            sb.append(System.lineSeparator())
             sb.append("Found ${users.size} results")
+            sb.append(System.lineSeparator())
 
             return sb.toString()
         }

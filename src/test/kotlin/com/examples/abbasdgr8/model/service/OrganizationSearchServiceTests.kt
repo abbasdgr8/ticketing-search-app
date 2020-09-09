@@ -112,13 +112,10 @@ class OrganizationSearchServiceTests: Spek({
         val expectedFields = listOf(
                                 "_id",
                                 "alias",
-                                "created_at",
                                 "details",
-                                "domain_names",
                                 "external_id",
                                 "name",
                                 "shared_tickets",
-                                "tags",
                                 "url"
                             )
 

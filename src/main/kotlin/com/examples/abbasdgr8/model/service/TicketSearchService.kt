@@ -57,7 +57,14 @@ class TicketSearchService : SearchService() {
     companion object {
         private val searchableFields: Collection<KProperty1<Ticket, *>>
             get() {
-                return Ticket::class.memberProperties
+                return Ticket::class.memberProperties.filter {
+                    when(it.returnType.toString()) {
+                        // Exclude fields with these types since search on them is not yet supported
+                        "java.util.Date" -> false
+                        "kotlin.collections.List<kotlin.String>" -> false
+                        else -> true
+                    }
+                }
             }
     }
 }

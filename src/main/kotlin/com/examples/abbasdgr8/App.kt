@@ -5,7 +5,12 @@ import java.util.*
 
 
 fun main(args: Array<String>) {
-    var input = ""
+
+    /**
+     * Continuous feedback loop that facilitates an
+     * interactive CLI exchange between user input
+     * and app output
+     */
     while(true) {
         print(controller.processAction(input))
         input = command.nextLine()
@@ -14,3 +19,4 @@ fun main(args: Array<String>) {
 
 val controller = ViewController()
 val command = Scanner(System.`in`)
+var input = ""

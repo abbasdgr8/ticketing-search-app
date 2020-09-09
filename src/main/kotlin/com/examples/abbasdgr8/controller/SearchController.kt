@@ -10,11 +10,11 @@ import kotlin.system.exitProcess
 
 open class SearchController {
 
-    protected val stateMachine = AppStateMachine().stateMachine
+    protected val ticketSearchService: TicketSearchService
+    protected val userSearchService: UserSearchService
+    protected val orgSearchService: OrganizationSearchService
 
-    protected val ticketSearchService = TicketSearchService()
-    protected val userSearchService = UserSearchService()
-    protected val orgSearchService = OrganizationSearchService()
+    protected val stateMachine = AppStateMachine().stateMachine
 
     protected var cachedFieldName = ""
     protected var cachedFieldValue = ""
@@ -74,5 +74,19 @@ open class SearchController {
 
             End -> exitProcess(0)
         }
+    }
+
+    constructor() {
+        this.ticketSearchService = TicketSearchService()
+        this.userSearchService = UserSearchService()
+        this.orgSearchService = OrganizationSearchService()
+    }
+
+    constructor(ticketSearchService: TicketSearchService,
+                userSearchService: UserSearchService,
+                orgSearchService: OrganizationSearchService) {
+        this.ticketSearchService = ticketSearchService
+        this.userSearchService = userSearchService
+        this.orgSearchService = orgSearchService
     }
 }

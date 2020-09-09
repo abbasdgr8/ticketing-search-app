@@ -6,7 +6,6 @@ import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import java.lang.Exception
-import java.text.SimpleDateFormat
 import java.util.*
 
 class UserSearchServiceTests: Spek({
@@ -41,39 +40,6 @@ class UserSearchServiceTests: Spek({
             Then("36 out of 75 inactive records are returned") {
                 results.shouldNotBeNull()
                 results.size shouldBeEqualTo 36
-            }
-        }
-    }
-
-
-    Feature("Searching by created_at date") {
-
-        Scenario("Searching on created_at for an existing record") {
-
-            val createdAt = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss X").parse("2016-04-15T05:19:46 -10:00")
-            lateinit var results: List<User>
-
-            When("Search by created_at is invoked") {
-                results = service.findByField("created_at", createdAt)
-            }
-
-            Then("Matching record gets returned") {
-                results.shouldNotBeNull()
-                results.size shouldBeEqualTo 1
-            }
-        }
-
-        Scenario("Searching on created_at for non existent record") {
-
-            val createdAt = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss X").parse("2019-04-15T05:19:46 -10:00")
-            lateinit var results: List<User>
-
-            When("Search by created_at is invoked") {
-                results = service.findByField("created_at", createdAt)
-            }
-
-            Then("No record gets returned") {
-                results.shouldBeEmpty()
             }
         }
     }

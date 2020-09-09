@@ -3,6 +3,7 @@ package com.examples.abbasdgr8.model.service
 import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.UserSearchError
 import java.lang.Exception
+import java.util.*
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
@@ -28,7 +29,29 @@ class UserSearchService : SearchService() {
     }
 
     private fun <T> executeSearch(field: KProperty1<User, *>, fieldValue: T): List<User> {
+        return when(field.returnType.toString()) {
+            "kotlin.Int" -> executeIntegerSearch(field, fieldValue.toString().toInt())
+            "kotlin.String" -> executeTextSearch(field, fieldValue.toString())
+            "java.util.Date" -> executeDateSearch(field, Date())
+            "kotlin.Boolean" -> executeBooleanSearch(field, fieldValue.toString().toBoolean())
+            else -> listOf()
+        }
+    }
+
+    private fun executeTextSearch(field: KProperty1<User, *>, fieldValue: String): List<User> {
         return users.filter { field.get(it) == fieldValue }
+    }
+
+    private fun executeIntegerSearch(field: KProperty1<User, *>, fieldValue: Int): List<User> {
+        return users.filter { field.get(it) == fieldValue }
+    }
+
+    private fun executeBooleanSearch(field: KProperty1<User, *>, fieldValue: Boolean): List<User> {
+        return users.filter { field.get(it) == fieldValue }
+    }
+
+    private fun executeDateSearch(field: KProperty1<User, *>, date: Date): List<User> {
+        TODO("Not yet implemented")
     }
 
     companion object {

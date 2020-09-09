@@ -20,14 +20,6 @@ class OrganizationsView {
             return organizationsFields + sb.toString()
         }
 
-        fun getOrganizationsFieldName(): String {
-            return organizationsFieldName
-        }
-
-        fun getOrganizationsFieldValue(): String {
-            return organizationsFieldValue
-        }
-
         fun getOrganizationRecord(organizations: List<Organization>): String {
             val sb = StringBuilder()
             organizations.forEach { organization ->
@@ -47,10 +39,11 @@ class OrganizationsView {
                                     |-------------------------------------------------------|
                                     | Select Search Options:                                |
                                     |                                                       |
-                                    | Press 1 to view all Searchable fields on Organization |
-                                    | Press 2 to search                                     |
-                                    | Press 3 to go to back to the Main Menu                |
+                                    | Type 1 to view all Searchable fields on Organization  |
+                                    | Type 2 to search                                      |
+                                    | Type 3 to go to back to the Main Menu                 |
                                     | ------------------------------------------------------|
+                                    
                                     """
 
         private const val organizationsFields = """                 
@@ -58,14 +51,7 @@ class OrganizationsView {
                                     |---------------- ORGANIZATIONS FIELDS -----------------|
                                     |-------------------------------------------------------|
                                     | Enter '.' followed by 'Enter' to Proceed              |
-                                    """
-
-        private const val organizationsFieldName = """                 
-                                    Please enter name of the field that you want to search by:
-                                    """
-
-        private const val organizationsFieldValue = """                 
-                                    Please enter value of the field that you want to search by:
+                                    
                                     """
     }
 

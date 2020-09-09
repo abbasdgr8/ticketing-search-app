@@ -1,6 +1,7 @@
 package com.examples.abbasdgr8.controller.state
 
 import com.tinder.StateMachine
+import kotlin.system.exitProcess
 
 class AppStateMachine {
 
@@ -134,6 +135,12 @@ class AppStateMachine {
         state<CliState.OrgRecord> {
             on<UserEvent.Proceed> {
                 transitionTo(CliState.MainMenu)
+            }
+        }
+
+        state<CliState.End> {
+            on<UserEvent.Proceed> {
+                exitProcess(0)
             }
         }
 

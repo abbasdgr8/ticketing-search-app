@@ -20,14 +20,6 @@ class UsersView {
             return usersFields + sb.toString()
         }
 
-        fun getUsersFieldName(): String {
-            return usersFieldName
-        }
-
-        fun getUsersFieldValue(): String {
-            return usersFieldValue
-        }
-
         fun getUserRecord(users: List<User>): String {
             val sb = StringBuilder()
             users.forEach { user ->
@@ -43,29 +35,23 @@ class UsersView {
 
         private const val usersMenu = """                 
                                     |-------------------------------------------------------|
-                                    |-------------------- USERS MENU ---------------------|
+                                    |---------------------- USERS MENU ---------------------|
                                     |-------------------------------------------------------|
                                     | Select Search Options:                                |
                                     |                                                       |
-                                    | Press 1 to view all Searchable fields on Users      |
-                                    | Press 2 to search                                     |
-                                    | Press 3 to go to back to the Main Menu                |
+                                    | Type 1 to view all Searchable fields on Users         |
+                                    | Type 2 to search                                      |
+                                    | Type 3 to go to back to the Main Menu                 |
                                     | ------------------------------------------------------|
+                                    
                                     """
 
         private const val usersFields = """                 
                                     |-------------------------------------------------------|
-                                    |------------------- USERS FIELDS --------------------|
+                                    |--------------------- USERS FIELDS --------------------|
                                     |-------------------------------------------------------|
-                                    | Enter '.' followed by 'Enter' to Proceed              |
-                                    """
-
-        private const val usersFieldName = """                 
-                                    Please enter name of the field that you want to search by:
-                                    """
-
-        private const val usersFieldValue = """                 
-                                    Please enter value of the field that you want to search by:
+                                    | Type '.' followed by 'Enter' to Proceed               |
+                                    
                                     """
     }
 

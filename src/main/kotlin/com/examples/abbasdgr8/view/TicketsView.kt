@@ -20,14 +20,6 @@ class TicketsView {
             return ticketsFields + sb.toString()
         }
 
-        fun getTicketsFieldName(): String {
-            return ticketsFieldName
-        }
-
-        fun getTicketsFieldValue(): String {
-            return ticketsFieldValue
-        }
-
         fun getTicketRecord(tickets: List<Ticket>): String {
             val sb = StringBuilder()
             tickets.forEach { ticket ->
@@ -47,10 +39,11 @@ class TicketsView {
                                     |-------------------------------------------------------|
                                     | Select Search Options:                                |
                                     |                                                       |
-                                    | Press 1 to view all Searchable fields on Tickets      |
-                                    | Press 2 to search                                     |
-                                    | Press 3 to go to back to the Main Menu                |
+                                    | Type 1 to view all Searchable fields on Tickets       |
+                                    | Type 2 to search                                      |
+                                    | Type 3 to go to back to the Main Menu                 |
                                     | ------------------------------------------------------|
+                                    
                                     """
 
         private const val ticketsFields = """                 
@@ -58,14 +51,7 @@ class TicketsView {
                                     |------------------- TICKETS FIELDS --------------------|
                                     |-------------------------------------------------------|
                                     | Enter '.' followed by 'Enter' to Proceed              |
-                                    """
-
-        private const val ticketsFieldName = """                 
-                                    Please enter name of the field that you want to search by:
-                                    """
-
-        private const val ticketsFieldValue = """                 
-                                    Please enter value of the field that you want to search by:
+                                    
                                     """
     }
 

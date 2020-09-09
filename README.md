@@ -52,7 +52,7 @@ be behavioural differences on how the CLI app runs on a different OS
 
 ### Tech Debt / TODOs
 - [ ] Add build and code coverage badges to repo
-- [ ] Add a plugin that calculates Test Coverage during build
+- [ ] Current functionality only has search without indexing. Explore other indexing options for future enhancements.
 - [ ] Clean up and beautify CLI views that get displayed to the end user. Perhaps evaluate CLI libraries like Clikt
 - [ ] Add more tests for Controllers
 

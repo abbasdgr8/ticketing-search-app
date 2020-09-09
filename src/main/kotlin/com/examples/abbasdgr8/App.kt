@@ -1,12 +1,16 @@
 package com.examples.abbasdgr8
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello world."
-        }
-}
+import com.examples.abbasdgr8.controller.ViewController
+import java.util.*
+
 
 fun main(args: Array<String>) {
-    println(App().greeting)
+    var input = ""
+    while(true) {
+        print(controller.process(input))
+        input = command.nextLine()
+    }
 }
+
+val controller = ViewController()
+val command = Scanner(System.`in`)

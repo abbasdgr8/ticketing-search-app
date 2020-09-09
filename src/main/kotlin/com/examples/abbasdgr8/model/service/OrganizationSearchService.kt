@@ -3,6 +3,7 @@ package com.examples.abbasdgr8.model.service
 import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.service.exceptions.OrganizationSearchError
 import java.lang.Exception
+import java.util.*
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
@@ -28,7 +29,24 @@ class OrganizationSearchService : SearchService() {
     }
 
     private fun <T> executeSearch(field: KProperty1<Organization, *>, fieldValue: T): List<Organization> {
+        return when(field.returnType.toString()) {
+            "kotlin.Int" -> executeIntegerSearch(field, fieldValue.toString().toInt())
+            "kotlin.String" -> executeTextSearch(field, fieldValue.toString())
+            "java.util.Date" -> executeDateSearch(field, Date(fieldValue.toString()))
+            else -> listOf()
+        }
+    }
+
+    private fun executeTextSearch(field: KProperty1<Organization, *>, fieldValue: String): List<Organization> {
         return organizations.filter { field.get(it) == fieldValue }
+    }
+
+    private fun executeIntegerSearch(field: KProperty1<Organization, *>, fieldValue: Int): List<Organization> {
+        return organizations.filter { field.get(it) == fieldValue }
+    }
+
+    private fun executeDateSearch(field: KProperty1<Organization, *>, date: Date): List<Organization> {
+        TODO("Not yet implemented")
     }
 
     companion object {

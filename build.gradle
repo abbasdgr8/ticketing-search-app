@@ -6,6 +6,14 @@ plugins {
     id 'application'
 }
 
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -13,14 +21,21 @@ repositories {
 }
 
 dependencies {
+
+    // GSON Library
+    compile 'com.google.code.gson:gson:2.8.5'
+
+    // Kotlin Reflect
+    compile 'org.jetbrains.kotlin:kotlin-reflect'
+
     // Align versions of all Kotlin components
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
 
     // Use the Kotlin JDK 8 standard library.
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
-    compile 'com.google.code.gson:gson:2.8.5'
-    compile 'org.jetbrains.kotlin:kotlin-reflect'
+    // For implementation of a State Machine
+    implementation 'com.tinder.statemachine:statemachine:0.2.0'
 
     // Kluent library for test assertions
     testCompile 'org.amshove.kluent:kluent:1.61'
@@ -46,4 +61,8 @@ test {
     useJUnitPlatform {
         includeEngines 'spek2'
     }
+}
+
+run {
+    standardInput = System.in
 }

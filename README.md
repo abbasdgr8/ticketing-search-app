@@ -1,11 +1,14 @@
-[![Build Status](https://travis-ci.com/abbasdgr8/ticketing-search-app.svg?token=sVudbeziXANtkqKLaFRM&branch=master)](https://travis-ci.com/abbasdgr8/ticketing-search-app)
-
 # ticketing-search-app
+
+[![Build Status](https://travis-ci.com/abbasdgr8/ticketing-search-app.svg?token=sVudbeziXANtkqKLaFRM&branch=master)](https://travis-ci.com/abbasdgr8/ticketing-search-app)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
+
+
 Implementation of a (Kotlin) CLI application to search ticketing data and return results 
 in a human readable format.
 
-In order to standardise feature development and ensure separation of concerns, this has been
-developed as a Model-View-Controller application.
+In order to standardise feature development and ensure separation of concerns, this search tool 
+has been developed as a Model-View-Controller application.
 
 ## Pre-Requisites
 - git on bash
@@ -39,7 +42,7 @@ If you'd like to run and modify tests independently in IntelliJ, you need to ins
 ## Usage
 ```bash
 # Runs the main class (App.kt)
-$ ./gradlew run
+$ ./gradlew run --console=plain
 ```
 
 ## Notes

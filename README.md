@@ -8,9 +8,7 @@ Implementation of a (Kotlin) CLI application to search ticketing data and return
 in a human readable format.
 
 In order to standardise feature development and ensure separation of concerns, this search tool 
-has been developed as a Model-View-Controller application.
-
-[![MVC Diagram](https://github.com/abbasdgr8/ticketing-search-app/blob/develop/docs/mvc_role_diagram.png)]
+has been developed as a [Model-View-Controller](https://github.com/abbasdgr8/ticketing-search-app/blob/master/docs/mvc_role_diagram.png) application.
 
 ## Pre-Requisites
 - git on bash
@@ -57,6 +55,7 @@ be behavioural differences on how the CLI app runs on a different OS
 - [ ] Current functionality only has search without indexing. Explore other indexing options for future enhancements.
 - [ ] Clean up and beautify CLI views that get displayed to the end user. Perhaps evaluate CLI libraries like Clikt
 - [ ] Add more tests for Controllers
+- [ ] Add search support for other datatypes like date, and array
 
 ### Assumptions
 - [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/master/src/main/resources/input-data) for arriving at the basic search functionality.

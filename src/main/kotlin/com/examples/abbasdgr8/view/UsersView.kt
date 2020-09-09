@@ -30,7 +30,7 @@ class UsersView {
                 sb.append(System.lineSeparator())
             }
             sb.append(System.lineSeparator())
-            sb.append("Found ${users.size} results")
+            sb.append("Found ${users.size} results. Enter '.' followed by 'Enter' to Proceed")
             sb.append(System.lineSeparator())
 
             return sb.toString()

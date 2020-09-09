@@ -7,7 +7,7 @@ import java.util.*
 fun main(args: Array<String>) {
     var input = ""
     while(true) {
-        print(controller.process(input))
+        print(controller.processAction(input))
         input = command.nextLine()
     }
 }

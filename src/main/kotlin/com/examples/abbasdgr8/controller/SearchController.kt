@@ -3,13 +3,18 @@ package com.examples.abbasdgr8.controller
 import com.examples.abbasdgr8.controller.state.AppStateMachine
 import com.examples.abbasdgr8.controller.state.CliState.*
 import com.examples.abbasdgr8.controller.state.UserEvent
+import com.examples.abbasdgr8.model.service.OrganizationSearchService
 import com.examples.abbasdgr8.model.service.TicketSearchService
+import com.examples.abbasdgr8.model.service.UserSearchService
 import kotlin.system.exitProcess
 
 open class SearchController {
 
     protected val stateMachine = AppStateMachine().stateMachine
+
     protected val ticketSearchService = TicketSearchService()
+    protected val userSearchService = UserSearchService()
+    protected val orgSearchService = OrganizationSearchService()
 
     protected var cachedFieldName = ""
     protected var cachedFieldValue = ""

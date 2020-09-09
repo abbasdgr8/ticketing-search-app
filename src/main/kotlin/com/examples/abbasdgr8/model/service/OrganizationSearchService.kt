@@ -32,7 +32,8 @@ class OrganizationSearchService : SearchService() {
         return when(field.returnType.toString()) {
             "kotlin.Int" -> executeIntegerSearch(field, fieldValue.toString().toInt())
             "kotlin.String" -> executeTextSearch(field, fieldValue.toString())
-            "java.util.Date" -> executeDateSearch(field, Date(fieldValue.toString()))
+            "java.util.Date" -> executeDateSearch(field, Date())
+            "kotlin.Boolean" -> executeBooleanSearch(field, fieldValue.toString().toBoolean())
             else -> listOf()
         }
     }
@@ -42,6 +43,10 @@ class OrganizationSearchService : SearchService() {
     }
 
     private fun executeIntegerSearch(field: KProperty1<Organization, *>, fieldValue: Int): List<Organization> {
+        return organizations.filter { field.get(it) == fieldValue }
+    }
+
+    private fun executeBooleanSearch(field: KProperty1<Organization, *>, fieldValue: Boolean): List<Organization> {
         return organizations.filter { field.get(it) == fieldValue }
     }
 

@@ -46,9 +46,15 @@ $ ./gradlew run --console=plain
 ```
 
 ## Notes
+
+This application was developed and tested on a MacOS Catalina. Therefore, there might possibly 
+be behavioural differences on how the CLI app runs on a different OS
+
 ### Tech Debt / TODOs
 - [ ] Add build and code coverage badges to repo
 - [ ] Add a plugin that calculates Test Coverage during build
+- [ ] Clean up and beautify CLI views that get displayed to the end user
+- [ ] Add more tests for Controllers
 
 ### Assumptions
 - [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/master/src/test/resources/json) for arriving at the basic search functionality.

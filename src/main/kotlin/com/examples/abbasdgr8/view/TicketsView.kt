@@ -30,7 +30,7 @@ class TicketsView {
                 sb.append(System.lineSeparator())
             }
             sb.append(System.lineSeparator())
-            sb.append("Found ${tickets.size} results")
+            sb.append("Found ${tickets.size} results. Enter '.' followed by 'Enter' to Proceed")
             sb.append(System.lineSeparator())
 
             return sb.toString()

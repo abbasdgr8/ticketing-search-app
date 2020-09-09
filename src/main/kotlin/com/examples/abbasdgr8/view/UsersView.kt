@@ -17,6 +17,7 @@ class UsersView {
                 sb.append("\n")
                 sb.append(field)
             }
+            sb.append("\n\n")
             return usersFields + sb.toString()
         }
 

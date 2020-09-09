@@ -74,10 +74,8 @@ class UserSearchServiceTests: Spek({
                                 "_id",
                                 "active",
                                 "alias",
-                                "created_at",
                                 "email",
                                 "external_id",
-                                "last_login_at",
                                 "locale",
                                 "name",
                                 "organization_id",
@@ -86,7 +84,6 @@ class UserSearchServiceTests: Spek({
                                 "shared",
                                 "signature",
                                 "suspended",
-                                "tags",
                                 "timezone",
                                 "url",
                                 "verified"

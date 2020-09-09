@@ -20,6 +20,7 @@ class IndexView {
                                     |-------------------------------------------------------|
                                     |---------- Welcome to Ticketing Search App ------------|
                                     |-------------------------------------------------------|
+                                    |*******************************************************|
                                     |                                                       |
                                     |                   GENERAL INSTRUCTIONS                | 
                                     |                                                       |
@@ -27,12 +28,10 @@ class IndexView {
                                     |                                                       |
                                     | Pressing 'Enter' displays the same screen to you again|
                                     |                                                       |
-                                    | In order to change the screen, type in the number     |
-                                    | corresponding to the option and press 'Enter'         |
-                                    |                                                       |
                                     | When no options are presented,                        |
                                     | Enter '.' followed by 'Enter' to Proceed              |
                                     | ------------------------------------------------------|
+                                    
                                     """
         private const val mainMenu = """                 
                                     |-------------------------------------------------------|
@@ -40,15 +39,18 @@ class IndexView {
                                     |-------------------------------------------------------|
                                     | Select Search Options:                                |
                                     |                                                       |
-                                    | Press 1 to go to the Tickets Menu                     |
-                                    | Press 2 to go to the Users Menu                       |
-                                    | Press 3 to go to the Organizations Menu               |
-                                    | Press 4 to EXIT the application                       |
+                                    | Type 1 to go to the Tickets Menu                      |
+                                    | Type 2 to go to the Users Menu                        |
+                                    | Type 3 to go to the Organizations Menu                |
+                                    | Type 4 to EXIT the application                        |
                                     | ------------------------------------------------------|
+                                    
                                     """
 
         private const val end = """                 
-                                    Press Ctrl+C to exit app
+                                    |-------------------------------------------------------|
+                                    | You have chosen to EXIT the app. Exiting gracefully...|
+                                    |-------------------------------------------------------|
                                     """
     }
 

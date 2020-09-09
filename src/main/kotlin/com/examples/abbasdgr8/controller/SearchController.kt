@@ -72,7 +72,7 @@ open class SearchController {
                 }
             }
 
-            End -> exitProcess(10)
+            End -> exitProcess(0)
         }
     }
 }

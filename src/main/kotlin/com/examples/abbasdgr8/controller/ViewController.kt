@@ -1,10 +1,7 @@
 package com.examples.abbasdgr8.controller
 
 import com.examples.abbasdgr8.controller.state.CliState.*
-import com.examples.abbasdgr8.view.IndexView
-import com.examples.abbasdgr8.view.OrganizationsView
-import com.examples.abbasdgr8.view.TicketsView
-import com.examples.abbasdgr8.view.UsersView
+import com.examples.abbasdgr8.view.*
 
 class ViewController: SearchController() {
 
@@ -22,21 +19,18 @@ class ViewController: SearchController() {
 
             TicketsMenu -> return TicketsView.getTicketsMenu()
             TicketFields -> return TicketsView.getTicketsFields(ticketSearchService.getAllSearchableFieldNames())
-            TicketSearchFieldInput -> return TicketsView.getTicketsFieldName()
-            TicketSearchValueInput -> return TicketsView.getTicketsFieldValue()
             TicketRecord -> return TicketsView.getTicketRecord(ticketSearchService.findByField(cachedFieldName, cachedFieldValue))
 
             UsersMenu -> return UsersView.getUsersMenu()
             UserFields -> return UsersView.getUsersFields(userSearchService.getAllSearchableFieldNames())
-            UserSearchFieldInput -> return UsersView.getUsersFieldName()
-            UserSearchValueInput -> return UsersView.getUsersFieldValue()
             UserRecord -> return UsersView.getUserRecord(userSearchService.findByField(cachedFieldName, cachedFieldValue))
 
             OrgsMenu -> return OrganizationsView.getOrganizationsMenu()
             OrgFields -> return OrganizationsView.getOrganizationsFields(orgSearchService.getAllSearchableFieldNames())
-            OrgSearchFieldInput -> return OrganizationsView.getOrganizationsFieldName()
-            OrgSearchValueInput -> return OrganizationsView.getOrganizationsFieldValue()
             OrgRecord -> return OrganizationsView.getOrganizationRecord(orgSearchService.findByField(cachedFieldName, cachedFieldValue))
+
+            TicketSearchFieldInput, UserSearchFieldInput, OrgSearchFieldInput -> return ViewCommons.getFieldNamePrompt()
+            TicketSearchValueInput, UserSearchValueInput, OrgSearchValueInput -> return ViewCommons.getFieldValuePrompt()
         }
     }
 

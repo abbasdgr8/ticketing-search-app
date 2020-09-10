@@ -45,6 +45,38 @@ class UserSearchServiceTests: Spek({
     }
 
 
+    Feature("Partial search on locale field") {
+
+        Scenario("Searching with locale containing en to obtain multiple matching records") {
+
+            lateinit var results: List<User>
+
+            When("Search by locale is invoked") {
+                results = service.findByField("locale", "en")
+            }
+
+            Then("32 out of 75 en records are returned") {
+                results.shouldNotBeNull()
+                results.size shouldBeEqualTo 32
+            }
+        }
+
+        Scenario("Searching with locale containing hh to obtain no matches") {
+
+            lateinit var results: List<User>
+
+            When("Search by locale is invoked") {
+                results = service.findByField("locale", "hh")
+            }
+
+            Then("0 out of 75 inactive records are returned") {
+                results.shouldNotBeNull()
+                results.size shouldBeEqualTo 0
+            }
+        }
+    }
+
+
     Feature("Searching on a field that does not exist") {
 
         Scenario("Seaching on field with name abc") {

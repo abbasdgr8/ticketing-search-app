@@ -39,7 +39,7 @@ class UserSearchService : SearchService() {
     }
 
     private fun executeTextSearch(field: KProperty1<User, *>, fieldValue: String): List<User> {
-        return users.filter { field.get(it) == fieldValue }
+        return users.filter { field.get(it).toString().contains(fieldValue) }
     }
 
     private fun executeIntegerSearch(field: KProperty1<User, *>, fieldValue: Int): List<User> {

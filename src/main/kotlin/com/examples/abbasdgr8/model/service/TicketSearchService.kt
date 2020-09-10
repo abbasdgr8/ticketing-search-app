@@ -39,7 +39,7 @@ class TicketSearchService : SearchService() {
     }
 
     private fun executeTextSearch(field: KProperty1<Ticket, *>, fieldValue: String): List<Ticket> {
-        return tickets.filter { field.get(it) == fieldValue }
+        return tickets.filter { field.get(it).toString().contains(fieldValue) }
     }
 
     private fun executeIntegerSearch(field: KProperty1<Ticket, *>, fieldValue: Int): List<Ticket> {

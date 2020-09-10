@@ -39,7 +39,7 @@ class OrganizationSearchService : SearchService() {
     }
 
     private fun executeTextSearch(field: KProperty1<Organization, *>, fieldValue: String): List<Organization> {
-        return organizations.filter { field.get(it) == fieldValue }
+        return organizations.filter { field.get(it).toString().contains(fieldValue) }
     }
 
     private fun executeIntegerSearch(field: KProperty1<Organization, *>, fieldValue: Int): List<Organization> {

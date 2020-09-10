@@ -61,3 +61,4 @@ be behavioural differences on how the CLI app runs on a different OS
 - [ ] It is acceptable to use [given input data](https://github.com/abbasdgr8/ticketing-search-app/tree/master/src/main/resources/input-data) for arriving at the basic search functionality.
 - [ ] It is possible that some of the given input data could be invalid and so there need to be cases to handle that scenario
 - [ ] All input data would be of size that could be easily loaded into the JVM memory; thereby eliminating the need of data persistence.
+- [ ] It is acceptable to assume that this app is expected to satisfy search functionality only for the English language

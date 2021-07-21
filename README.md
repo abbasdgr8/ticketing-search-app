@@ -12,7 +12,7 @@ has been developed as a [Model-View-Controller](https://github.com/abbasdgr8/tic
 
 ## Pre-Requisites
 - git on bash
-- JDK ==> 14
+- JDK ==> 8
 - Gradle ==> 6+
 - Kotlin ==> 1.3+
 

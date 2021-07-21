@@ -1,7 +1,7 @@
 language: java
 
 jdk:
-  - oraclejdk14
+  - oraclejdk8
 
 os:
   - linux
@@ -18,5 +18,5 @@ before_install:
   - chmod +x ./gradlew
 
 script:
-  - ./gradlew clean install
+  - ./gradlew clean build
   - ./gradlew clean test

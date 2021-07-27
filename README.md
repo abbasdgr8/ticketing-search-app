@@ -42,7 +42,7 @@ If you'd like to run and modify tests independently in IntelliJ, you need to ins
 ## Usage
 ```bash
 # Runs the main class (App.kt)
-$ ./gradlew run --console=plain
+$ java -jar build/libs/ticketing-search-app-1.0-SNAPSHOT-all.jar
 ```
 
 ### Tech Debt / TODOs

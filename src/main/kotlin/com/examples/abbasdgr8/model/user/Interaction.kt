@@ -1,4 +1,4 @@
-package com.examples.abbasdgr8.view
+package com.examples.abbasdgr8.model.user
 
 /**
  * Represents a single interaction with the user
@@ -14,11 +14,3 @@ data class Interaction(
     val showPrompt: Boolean = true,
     val showDefault: Boolean = true
 )
-
-
-enum class Prompts(val text: String) {
-    ENTER("Enter?"),
-    CHOOSE("Choose an Option"),
-    BACK("Back to Menu?"),
-    SURE("Are you sure?")
-}

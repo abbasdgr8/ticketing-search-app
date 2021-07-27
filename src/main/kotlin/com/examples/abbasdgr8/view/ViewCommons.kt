@@ -8,11 +8,11 @@ class ViewCommons {
     companion object {
 
         fun getScreen(fileName: String): String {
-            return File("$SCREENS_DIR_PATH/$fileName").readText()
+            return File("$SCREENS_DIR_PATH/$fileName.txt").readText()
         }
 
         fun getPrompt(fileName: String): String {
-            return File("$PROMPTS_DIR_PATH/$fileName").readText()
+            return File("$PROMPTS_DIR_PATH/$fileName.txt").readText()
         }
 
         fun getFieldsWithBanner(fields: List<String>, banner: String): String {
@@ -59,9 +59,9 @@ class ViewCommons {
         private const val SCREENS_DIR_PATH = "src/main/resources/screens"
         private const val PROMPTS_DIR_PATH = "src/main/resources/prompts"
 
-        private val fieldNamePrompt = getPrompt("field-name-prompt.txt")
-        private val fieldValuePrompt = getPrompt("field-value-prompt.txt")
-        private val fieldNameErrorMsg = getScreen("field-name-error.txt")
-        private val fieldValueErrorMsg = getScreen("field-value-error.txt")
+        private val fieldNamePrompt = getPrompt("field-name-prompt")
+        private val fieldValuePrompt = getPrompt("field-value-prompt")
+        private val fieldNameErrorMsg = getScreen("field-name-error")
+        private val fieldValueErrorMsg = getScreen("field-value-error")
     }
 }

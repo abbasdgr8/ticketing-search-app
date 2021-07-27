@@ -1,13 +1,14 @@
 package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.controller.ViewController
+import com.examples.abbasdgr8.view.constants.Inputs.*
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.output.TermUi.prompt
 
 
 class App : CliktCommand() {
 
-    private var userInput = ""
+    private var userInput = EMPTY.s
     private val controller = ViewController()
 
     override fun run() {
@@ -22,7 +23,7 @@ class App : CliktCommand() {
             userInput = if (i.showPrompt) {
                 prompt(text = i.prompt, default = i.default, showDefault = i.showDefault).toString()
             } else {
-                "Y"
+                YES.s
             }
         }
     }

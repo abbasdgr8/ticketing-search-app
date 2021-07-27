@@ -1,6 +1,8 @@
 package com.examples.abbasdgr8.view
 
 import com.examples.abbasdgr8.model.domain.User
+import com.examples.abbasdgr8.view.ViewCommons.Companion.getFieldsWithBanner
+import com.examples.abbasdgr8.view.ViewCommons.Companion.getRecordsWithBanner
 import com.examples.abbasdgr8.view.ViewCommons.Companion.getScreen
 
 class UsersView {
@@ -12,15 +14,15 @@ class UsersView {
         }
 
         fun getUsersFields(fields: List<String>): String {
-            return ViewCommons.getFieldsWithBanner(fields, usersFieldsBanner)
+            return getFieldsWithBanner(fields, usersFieldsBanner)
         }
 
         fun getUserRecord(users: List<User>): String {
-            return ViewCommons.getRecordsWithBanner(users)
+            return getRecordsWithBanner(users)
         }
 
-        private val usersMenu = getScreen("users-menu.txt")
-        private val usersFieldsBanner = getScreen("users-fields.txt")
+        private val usersMenu = getScreen("users-menu")
+        private val usersFieldsBanner = getScreen("users-fields")
     }
 
 }

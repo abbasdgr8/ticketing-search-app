@@ -21,8 +21,8 @@ class OrganizationsView {
             return getRecordsWithBanner(organizations)
         }
 
-        private val orgMenu = getScreen("org-menu.txt")
-        private val orgFieldsBanner = getScreen("org-fields.txt")
+        private val orgMenu = getScreen("org-menu")
+        private val orgFieldsBanner = getScreen("org-fields")
     }
 
 }

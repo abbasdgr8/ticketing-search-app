@@ -18,8 +18,8 @@ class IndexView {
             return end
         }
 
-        private val splash = getScreen("splash.txt")
-        private val mainMenu = getScreen("main-menu.txt")
-        private val end = getScreen("end.txt")
+        private val splash = getScreen("splash")
+        private val mainMenu = getScreen("main-menu")
+        private val end = getScreen("end")
     }
 }

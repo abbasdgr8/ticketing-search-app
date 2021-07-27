@@ -2,6 +2,7 @@ package com.examples.abbasdgr8.model.service
 
 import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.service.exceptions.OrganizationSearchError
+import com.examples.abbasdgr8.view.constants.Inputs
 import java.lang.Exception
 import java.util.*
 import kotlin.reflect.KProperty1
@@ -29,11 +30,12 @@ class OrganizationSearchService : SearchService() {
     }
 
     private fun <T> executeSearch(field: KProperty1<Organization, *>, fieldValue: T): List<Organization> {
+        val searchText = fieldValue.toString()
         return when(field.returnType.toString()) {
-            "kotlin.Int" -> executeIntegerSearch(field, fieldValue.toString().toInt())
-            "kotlin.String" -> executeTextSearch(field, fieldValue.toString())
+            "kotlin.Int" -> executeIntegerSearch(field, if (searchText == Inputs.EMPTY.s) Int.MIN_VALUE else searchText.toInt())
+            "kotlin.String" -> executeTextSearch(field, searchText)
             "java.util.Date" -> executeDateSearch(field, Date())
-            "kotlin.Boolean" -> executeBooleanSearch(field, fieldValue.toString().toBoolean())
+            "kotlin.Boolean" -> executeBooleanSearch(field, if (searchText == Inputs.EMPTY.s) true else searchText.toBoolean())
             else -> listOf()
         }
     }

@@ -1,22 +1,32 @@
 package com.examples.abbasdgr8
 
 import com.examples.abbasdgr8.controller.ViewController
-import java.util.*
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.output.TermUi.prompt
 
 
-fun main(args: Array<String>) {
+class App : CliktCommand() {
 
-    /**
-     * Continuous feedback loop that facilitates an
-     * interactive CLI exchange between user input
-     * and app output
-     */
-    while(true) {
-        print(controller.processAction(input))
-        input = command.nextLine()
+    private var userInput = ""
+    private val controller = ViewController()
+
+    override fun run() {
+        /**
+         * Continuous feedback loop that facilitates an
+         * interactive CLI exchange between user input
+         * and app output
+         */
+        while(true) {
+            val i = controller.getInteraction(userInput)
+            echo(i.screen)
+            userInput = if (i.showPrompt) {
+                prompt(text = i.prompt, default = i.default, showDefault = i.showDefault).toString()
+            } else {
+                "Y"
+            }
+        }
     }
 }
 
-val controller = ViewController()
-val command = Scanner(System.`in`)
-var input = ""
+
+fun main(args: Array<String>) = App().main(args)

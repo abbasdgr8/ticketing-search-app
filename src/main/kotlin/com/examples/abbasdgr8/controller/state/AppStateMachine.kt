@@ -16,52 +16,52 @@ class AppStateMachine {
         }
 
         state<CliState.MainMenu> {
-            on<UserEvent.ViewTicketsMenu> {
+            on<UserEvent.OptionOne> {
                 transitionTo(CliState.TicketsMenu)
             }
-            on<UserEvent.ViewUsersMenu> {
+            on<UserEvent.OptionTwo> {
                 transitionTo(CliState.UsersMenu)
             }
-            on<UserEvent.ViewOrgsMenu> {
+            on<UserEvent.OptionThree> {
                 transitionTo(CliState.OrgsMenu)
             }
-            on<UserEvent.Exit> {
+            on<UserEvent.OptionFour> {
                 transitionTo(CliState.End)
             }
         }
 
         state<CliState.TicketsMenu> {
-            on<UserEvent.ViewSearchableFields> {
+            on<UserEvent.OptionOne> {
                 transitionTo(CliState.TicketFields)
             }
-            on<UserEvent.InputSearchField> {
+            on<UserEvent.OptionTwo> {
                 transitionTo(CliState.TicketSearchFieldInput)
             }
-            on<UserEvent.ViewMainMenu> {
+            on<UserEvent.OptionThree> {
                 transitionTo(CliState.MainMenu)
             }
         }
 
         state<CliState.UsersMenu> {
-            on<UserEvent.ViewSearchableFields> {
+            on<UserEvent.OptionOne> {
                 transitionTo(CliState.UserFields)
             }
-            on<UserEvent.InputSearchField> {
+            on<UserEvent.OptionTwo> {
                 transitionTo(CliState.UserSearchFieldInput)
             }
-            on<UserEvent.ViewMainMenu> {
+            on<UserEvent.OptionThree> {
                 transitionTo(CliState.MainMenu)
             }
         }
 
         state<CliState.OrgsMenu> {
-            on<UserEvent.ViewSearchableFields> {
+            on<UserEvent.OptionOne> {
                 transitionTo(CliState.OrgFields)
             }
-            on<UserEvent.InputSearchField> {
+            on<UserEvent.OptionTwo> {
                 transitionTo(CliState.OrgSearchFieldInput)
             }
-            on<UserEvent.ViewMainMenu> {
+            on<UserEvent.OptionThree> {
                 transitionTo(CliState.MainMenu)
             }
         }
@@ -85,38 +85,92 @@ class AppStateMachine {
         }
 
         state<CliState.TicketSearchFieldInput> {
-            on<UserEvent.InputSearchValue> {
+            on<UserEvent.InputSearchField> {
                 transitionTo(CliState.TicketSearchValueInput)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.TicketSearchFieldNameError)
             }
         }
 
         state<CliState.UserSearchFieldInput> {
-            on<UserEvent.InputSearchValue> {
+            on<UserEvent.InputSearchField> {
                 transitionTo(CliState.UserSearchValueInput)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.UserSearchFieldNameError)
             }
         }
 
         state<CliState.OrgSearchFieldInput> {
-            on<UserEvent.InputSearchValue> {
+            on<UserEvent.InputSearchField> {
                 transitionTo(CliState.OrgSearchValueInput)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.OrgSearchFieldNameError)
             }
         }
 
         state<CliState.TicketSearchValueInput> {
-            on<UserEvent.Proceed> {
+            on<UserEvent.InputSearchValue> {
                 transitionTo(CliState.TicketRecord)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.TicketSearchFieldValueError)
             }
         }
 
         state<CliState.UserSearchValueInput> {
-            on<UserEvent.Proceed> {
+            on<UserEvent.InputSearchValue> {
                 transitionTo(CliState.UserRecord)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.UserSearchFieldValueError)
             }
         }
 
         state<CliState.OrgSearchValueInput> {
-            on<UserEvent.Proceed> {
+            on<UserEvent.InputSearchValue> {
                 transitionTo(CliState.OrgRecord)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.OrgSearchFieldValueError)
+            }
+        }
+
+        state<CliState.TicketSearchFieldNameError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.TicketsMenu)
+            }
+        }
+
+        state<CliState.UserSearchFieldNameError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.UsersMenu)
+            }
+        }
+
+        state<CliState.OrgSearchFieldNameError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.OrgsMenu)
+            }
+        }
+
+        state<CliState.TicketSearchFieldValueError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.TicketsMenu)
+            }
+        }
+
+        state<CliState.UserSearchFieldValueError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.UsersMenu)
+            }
+        }
+
+        state<CliState.OrgSearchFieldValueError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.OrgsMenu)
             }
         }
 
@@ -128,13 +182,13 @@ class AppStateMachine {
 
         state<CliState.UserRecord> {
             on<UserEvent.Proceed> {
-                transitionTo(CliState.MainMenu)
+                transitionTo(CliState.UsersMenu)
             }
         }
 
         state<CliState.OrgRecord> {
             on<UserEvent.Proceed> {
-                transitionTo(CliState.MainMenu)
+                transitionTo(CliState.OrgsMenu)
             }
         }
 
@@ -145,5 +199,4 @@ class AppStateMachine {
         }
 
     }
-
 }

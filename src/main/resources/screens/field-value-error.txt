@@ -1,0 +1,13 @@
+
+
+
+|-------------------------------------------------------|
+|------------------ FIELD VALUE ERROR ------------------|
+|-------------------------------------------------------|
+
+An error occured with your search entry!!
+
+Please review the field names and their data types
+and try again...
+
+

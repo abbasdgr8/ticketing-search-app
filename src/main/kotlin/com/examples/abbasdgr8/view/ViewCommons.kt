@@ -1,8 +1,44 @@
 package com.examples.abbasdgr8.view
 
+import java.io.File
+import java.lang.StringBuilder
+
 class ViewCommons {
 
     companion object {
+
+        fun getScreen(fileName: String): String {
+            return File("$SCREENS_DIR_PATH/$fileName").readText()
+        }
+
+        fun getPrompt(fileName: String): String {
+            return File("$PROMPTS_DIR_PATH/$fileName").readText()
+        }
+
+        fun getFieldsWithBanner(fields: List<String>, banner: String): String {
+            val sb = StringBuilder()
+            fields.forEach {field ->
+                sb.append(System.lineSeparator())
+                sb.append(field)
+            }
+            sb.append(System.lineSeparator())
+            sb.append(System.lineSeparator())
+            return banner + sb.toString()
+        }
+
+        fun <T> getRecordsWithBanner(records: List<T>): String {
+            val sb = StringBuilder()
+            records.forEach { record ->
+                sb.append(System.lineSeparator())
+                sb.append(record.toString())
+                sb.append(System.lineSeparator())
+            }
+            sb.append(System.lineSeparator())
+            sb.append("Found ${records.size} result(s)")
+            sb.append(System.lineSeparator())
+
+            return sb.toString()
+        }
 
         fun getFieldNamePrompt(): String {
             return fieldNamePrompt
@@ -12,26 +48,20 @@ class ViewCommons {
             return fieldValuePrompt
         }
 
-        fun getErrorMsg(): String {
-            return errorMsg
+        fun getFieldNameErrorMsg(): String {
+            return fieldNameErrorMsg
         }
 
-        private const val fieldNamePrompt = """                 
-                                    Please enter name of the field that you want to search by:
-                                    """
+        fun getFieldValueErrorMsg(): String {
+            return fieldValueErrorMsg
+        }
 
-        private const val fieldValuePrompt = """                 
-                                    Please enter value of the field that you want to search by:
-                                    """
+        private const val SCREENS_DIR_PATH = "src/main/resources/screens"
+        private const val PROMPTS_DIR_PATH = "src/main/resources/prompts"
 
-        private const val errorMsg = """                 
-                                    An error occured with your search entry. Please review the
-                                    field names and their data types and try again.
-                                    
-                                    Enter '.' followed by 'Enter' to Proceed
-                                    
-                                    
-                                    """
+        private val fieldNamePrompt = getPrompt("field-name-prompt.txt")
+        private val fieldValuePrompt = getPrompt("field-value-prompt.txt")
+        private val fieldNameErrorMsg = getScreen("field-name-error.txt")
+        private val fieldValueErrorMsg = getScreen("field-value-error.txt")
     }
-
 }

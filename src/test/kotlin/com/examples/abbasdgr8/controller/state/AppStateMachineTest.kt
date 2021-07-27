@@ -51,7 +51,7 @@ class AppStateMachineTest: Spek({
             }
 
             When("On UserEvent ViewTicketsMenu") {
-                stateMachine.transition(UserEvent.ViewTicketsMenu)
+                stateMachine.transition(UserEvent.OptionOne)
             }
 
             Then("Transitions to the TicketsMenu") {
@@ -69,7 +69,7 @@ class AppStateMachineTest: Spek({
             }
 
             When("On UserEvent ViewUsersMenu") {
-                stateMachine.transition(UserEvent.ViewUsersMenu)
+                stateMachine.transition(UserEvent.OptionTwo)
             }
 
             Then("Transitions to the UsersMenu") {
@@ -87,7 +87,7 @@ class AppStateMachineTest: Spek({
             }
 
             When("On UserEvent ViewOrgsMenu") {
-                stateMachine.transition(UserEvent.ViewOrgsMenu)
+                stateMachine.transition(UserEvent.OptionThree)
             }
 
             Then("Transitions to the OrgsMenu") {

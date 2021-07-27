@@ -26,6 +26,7 @@ class ViewControllerTests: Spek ({
         val ticket = mockk<Ticket>()
         val tickets = listOf(ticket)
 
+        every { ticketSearchService.getAllSearchableFieldNames() } returns TicketSearchService().getAllSearchableFieldNames()
         every { ticketSearchService.findByField(any(), any<String>()) } returns tickets
 
         val controller = ViewController(ticketSearchService, userSearchService, orgSearchService)
@@ -40,7 +41,7 @@ class ViewControllerTests: Spek ({
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view matches Splash Screen") {
@@ -54,12 +55,12 @@ class ViewControllerTests: Spek ({
             lateinit var userInput: String
             lateinit var view: String
 
-            Given("User Input => . ") {
-                userInput = "."
+            Given("User Input => Y") {
+                userInput = "Y"
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view matches Main Menu") {
@@ -77,7 +78,7 @@ class ViewControllerTests: Spek ({
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view matches Tickets Menu") {
@@ -88,36 +89,36 @@ class ViewControllerTests: Spek ({
         Scenario("ViewController enters Search on Option 2") {
 
             lateinit var userInput: String
-            lateinit var view: String
+            lateinit var prompt: String
 
             Given("User Input => 2") {
                 userInput = "2"
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                prompt = controller.getInteraction(userInput).prompt
             }
 
-            Then("view matches search fields") {
-                view shouldBeEqualTo ViewCommons.getFieldNamePrompt()
+            Then("prompt matches search fields") {
+                prompt shouldBeEqualTo ViewCommons.getFieldNamePrompt()
             }
         }
 
         Scenario("ViewController enters Search Value on field name") {
 
             lateinit var userInput: String
-            lateinit var view: String
+            lateinit var prompt: String
 
             Given("User Input => assignee_id") {
                 userInput = "assignee_id"
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                prompt = controller.getInteraction(userInput).prompt
             }
 
             Then("view matches search fields") {
-                view shouldBeEqualTo ViewCommons.getFieldValuePrompt()
+                prompt shouldBeEqualTo ViewCommons.getFieldValuePrompt()
             }
         }
 
@@ -131,7 +132,7 @@ class ViewControllerTests: Spek ({
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view returns ticket record") {
@@ -149,7 +150,7 @@ class ViewControllerTests: Spek ({
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view returns tickets menu") {
@@ -167,7 +168,7 @@ class ViewControllerTests: Spek ({
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view returns main menu") {
@@ -185,7 +186,7 @@ class ViewControllerTests: Spek ({
             }
 
             When("processAction() is invoked") {
-                view = controller.processAction(userInput)
+                view = controller.getInteraction(userInput).screen
             }
 
             Then("view returns main menu") {

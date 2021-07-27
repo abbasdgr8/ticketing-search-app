@@ -11,39 +11,44 @@ import java.lang.Exception
 class ViewController(ticketSearchService: TicketSearchService,
                      userSearchService: UserSearchService,
                      orgSearchService: OrganizationSearchService)
-        : SearchController(ticketSearchService, userSearchService, orgSearchService) {
+        : Controller(ticketSearchService, userSearchService, orgSearchService) {
 
-
-    fun processAction(userInput: String): String {
-        modifyUserState(userInput)
-        return view()
+    fun getInteraction(userInput: String): Interaction {
+        transitionState(userInput)
+        return generateInteraction()
     }
 
-    private fun view(): String {
+    private fun generateInteraction(): Interaction {
         try {
-            return when (stateMachine.state) {
+            when (stateMachine.state) {
 
-                SplashScreen -> return IndexView.getSplashScreen()
-                MainMenu -> return IndexView.getMainMenu()
-                End -> IndexView.getEnd()
+                SplashScreen -> return Interaction(IndexView.getSplashScreen(), Prompts.ENTER.text)
+                MainMenu -> return Interaction(IndexView.getMainMenu(), Prompts.CHOOSE.text, showDefault = false)
+                End -> return Interaction(IndexView.getEnd(), showPrompt = false)
 
-                TicketsMenu -> return TicketsView.getTicketsMenu()
-                TicketFields -> return TicketsView.getTicketsFields(ticketSearchService.getAllSearchableFieldNames())
-                TicketRecord -> return TicketsView.getTicketRecord(ticketSearchService.findByField(cachedFieldName, cachedFieldValue))
+                TicketsMenu -> return Interaction(TicketsView.getTicketsMenu(), Prompts.CHOOSE.text, showDefault = false)
+                TicketFields -> return Interaction(TicketsView.getTicketsFields(ticketSearchService.getAllSearchableFieldNames()), showPrompt = false)
+                TicketRecord -> return Interaction(TicketsView.getTicketRecord(ticketSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
+                TicketSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.BACK.text)
+                TicketSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.BACK.text)
 
-                UsersMenu -> return UsersView.getUsersMenu()
-                UserFields -> return UsersView.getUsersFields(userSearchService.getAllSearchableFieldNames())
-                UserRecord -> return UsersView.getUserRecord(userSearchService.findByField(cachedFieldName, cachedFieldValue))
+                UsersMenu -> return Interaction(UsersView.getUsersMenu(), Prompts.CHOOSE.text, showDefault = false)
+                UserFields -> return Interaction(UsersView.getUsersFields(userSearchService.getAllSearchableFieldNames()), showPrompt = false)
+                UserRecord -> return Interaction(UsersView.getUserRecord(userSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
+                UserSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.BACK.text)
+                UserSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.BACK.text)
 
-                OrgsMenu -> return OrganizationsView.getOrganizationsMenu()
-                OrgFields -> return OrganizationsView.getOrganizationsFields(orgSearchService.getAllSearchableFieldNames())
-                OrgRecord -> return OrganizationsView.getOrganizationRecord(orgSearchService.findByField(cachedFieldName, cachedFieldValue))
+                OrgsMenu -> return Interaction(OrganizationsView.getOrganizationsMenu(), Prompts.CHOOSE.text, showDefault = false)
+                OrgFields -> return Interaction(OrganizationsView.getOrganizationsFields(orgSearchService.getAllSearchableFieldNames()), showPrompt = false)
+                OrgRecord -> return Interaction(OrganizationsView.getOrganizationRecord(orgSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
+                OrgSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.BACK.text)
+                OrgSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.BACK.text)
 
-                TicketSearchFieldInput, UserSearchFieldInput, OrgSearchFieldInput -> return ViewCommons.getFieldNamePrompt()
-                TicketSearchValueInput, UserSearchValueInput, OrgSearchValueInput -> return ViewCommons.getFieldValuePrompt()
+                TicketSearchFieldInput, UserSearchFieldInput, OrgSearchFieldInput -> return Interaction(prompt = ViewCommons.getFieldNamePrompt(), showDefault = false)
+                TicketSearchValueInput, UserSearchValueInput, OrgSearchValueInput -> return Interaction(prompt = ViewCommons.getFieldValuePrompt(), showDefault = false)
             }
         } catch (e: Exception) {
-            return ViewCommons.getErrorMsg()
+            return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.BACK.text)
         }
     }
 

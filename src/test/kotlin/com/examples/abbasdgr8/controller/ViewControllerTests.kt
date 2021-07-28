@@ -159,13 +159,13 @@ class ViewControllerTests: Spek ({
             }
         }
 
-        Scenario("ViewController returns Main Menu on Option 3") {
+        Scenario("ViewController returns Main Menu on Option 4") {
 
             lateinit var userInput: String
             lateinit var view: String
 
-            Given("User Input => 3") {
-                userInput = "3"
+            Given("User Input => 4") {
+                userInput = "4"
             }
 
             When("processAction() is invoked") {
@@ -177,7 +177,7 @@ class ViewControllerTests: Spek ({
             }
         }
 
-        Scenario("ViewController Exits on Option 3") {
+        Scenario("ViewController Exits on Option 4") {
 
             lateinit var userInput: String
             lateinit var view: String

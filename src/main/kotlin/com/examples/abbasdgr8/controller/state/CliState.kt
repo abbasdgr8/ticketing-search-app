@@ -17,6 +17,9 @@ sealed class CliState {
     object TicketSearchValueInput: CliState()
     object TicketSearchFieldValueError: CliState()
     object TicketsSearchResult: CliState()
+    object TicketAssocationsIdInput: CliState()
+    object TicketAssocationsError: CliState()
+    object TicketAssociationsResult: CliState()
 
     object UsersMenu: CliState()
     object UserFields: CliState()
@@ -36,4 +39,7 @@ sealed class CliState {
     object OrgSearchValueInput: CliState()
     object OrgSearchFieldValueError: CliState()
     object OrgsSearchResult: CliState()
+    object OrgAssocationsIdInput: CliState()
+    object OrgAssocationsError: CliState()
+    object OrgAssociationsResult: CliState()
 }

@@ -38,6 +38,9 @@ class AppStateMachine {
                 transitionTo(CliState.TicketSearchFieldInput)
             }
             on<UserEvent.OptionThree> {
+                transitionTo(CliState.UserAssocationsIdInput)
+            }
+            on<UserEvent.OptionFour> {
                 transitionTo(CliState.MainMenu)
             }
         }
@@ -65,6 +68,9 @@ class AppStateMachine {
                 transitionTo(CliState.OrgSearchFieldInput)
             }
             on<UserEvent.OptionThree> {
+                transitionTo(CliState.UserAssocationsIdInput)
+            }
+            on<UserEvent.OptionFour> {
                 transitionTo(CliState.MainMenu)
             }
         }
@@ -141,12 +147,30 @@ class AppStateMachine {
             }
         }
 
+        state<CliState.TicketAssocationsIdInput> {
+            on<UserEvent.InputSearchValue> {
+                transitionTo(CliState.TicketAssociationsResult)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.TicketAssocationsError)
+            }
+        }
+
         state<CliState.UserAssocationsIdInput> {
             on<UserEvent.InputSearchValue> {
                 transitionTo(CliState.UserAssociationsResult)
             }
             on<UserEvent.Error> {
                 transitionTo(CliState.UserAssocationsError)
+            }
+        }
+
+        state<CliState.OrgAssocationsIdInput> {
+            on<UserEvent.InputSearchValue> {
+                transitionTo(CliState.OrgAssociationsResult)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.OrgAssocationsError)
             }
         }
 
@@ -186,9 +210,21 @@ class AppStateMachine {
             }
         }
 
+        state<CliState.TicketAssocationsError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.TicketsMenu)
+            }
+        }
+
         state<CliState.UserAssocationsError> {
             on<UserEvent.Proceed> {
                 transitionTo(CliState.UsersMenu)
+            }
+        }
+
+        state<CliState.OrgAssocationsError> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.OrgsMenu)
             }
         }
 
@@ -210,9 +246,21 @@ class AppStateMachine {
             }
         }
 
+        state<CliState.TicketAssociationsResult> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.TicketsMenu)
+            }
+        }
+
         state<CliState.UserAssociationsResult> {
             on<UserEvent.Proceed> {
                 transitionTo(CliState.UsersMenu)
+            }
+        }
+
+        state<CliState.OrgAssociationsResult> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.OrgsMenu)
             }
         }
 

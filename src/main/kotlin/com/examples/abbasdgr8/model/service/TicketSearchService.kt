@@ -31,13 +31,25 @@ class TicketSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
-    fun getAssociatedOrgAndUsers(ticket: Ticket): Pair<Organization?, MutableSet<User>> {
+    fun getAssociatedOrgAndUsers(ticketId: String): Pair<Organization?, Set<User>> {
+        val ticket = findById(ticketId)!!
         val associatedOrg = organizations.find { org -> org._id == ticket.organization_id }
-        val associatedUsers = users.filter {
-                user -> ticket.assignee_id == user._id ||
-                ticket.submitter_id == user._id
+        val associatedUsers = users.filter { user ->
+            ticket.assignee_id == user._id ||
+            ticket.submitter_id == user._id
         }.toMutableSet()
         return Pair(associatedOrg, associatedUsers)
+    }
+
+    @Throws(TicketSearchError::class)
+    fun findById(id: String): Ticket? {
+        val ticket: Ticket?
+        try {
+            ticket = tickets.findLast { t -> t._id == id }
+        } catch (e: Exception) {
+            throw TicketSearchError(e)
+        }
+        return ticket
     }
 
     private fun <T> executeSearch(field: KProperty1<Ticket, *>, fieldValue: T): List<Ticket> {

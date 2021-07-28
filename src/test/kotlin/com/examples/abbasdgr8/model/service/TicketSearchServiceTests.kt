@@ -177,14 +177,14 @@ class TicketSearchServiceTests: Spek({
 
     Feature("Get associated Org & Users") {
 
-        val ticket = InputDataDeserializer().readTickets(File("src/test/resources/json/valid/tickets.json"))[0]
+        val ticketId = InputDataDeserializer().readTickets(File("src/test/resources/json/valid/tickets.json"))[0]._id
 
         Scenario("For a valid, existing, and associated Ticket object") {
 
             lateinit var associatedOrgAndUsers: Pair<Organization?, Set<User>>
 
             When("Associations are queried") {
-                associatedOrgAndUsers = service.getAssociatedOrgAndUsers(ticket)
+                associatedOrgAndUsers = service.getAssociatedOrgAndUsers(ticketId)
             }
 
             Then("the correct associated org and users are returned") {

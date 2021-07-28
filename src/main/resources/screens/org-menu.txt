@@ -1,11 +1,12 @@
 
 
 
-|-------------------------------------------------------|
-|------------------ ORGANIZATIONS MENU -----------------|
-|-------------------------------------------------------|
-| Enter 1 to view all Searchable fields on Organization |
-| Enter 2 to search                                     |
-| Enter 3 to go to back to the Main Menu                |
-| ------------------------------------------------------|
+|--------------------------------|
+|------ ORGANIZATIONS MENU ------|
+|--------------------------------|
+| 1 - View all Searchable fields |
+| 2 - Search Records             |
+| 3 - Find Associations          |
+| 4 - Main Menu                  |
+| -------------------------------|
 

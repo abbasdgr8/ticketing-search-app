@@ -1,13 +1,15 @@
 
 
 
-|-------------------------------------------------------|
-|------------------ FIELD NAME ERROR -------------------|
-|-------------------------------------------------------|
+|--------------------------------|
+|------- FIELD NAME ERROR -------|
+|--------------------------------|
 
-The field name you entered is not searchable or does not exist!!
+The field name you entered is not
+searchable or does not exist!!
 
-Please review the searchable fields from
-Menu Option 1 and try again...
+Please review the searchable
+fields from Menu Option 1 and
+try again...
 
 

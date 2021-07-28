@@ -31,10 +31,22 @@ class OrganizationSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
-    fun getAssociatedTicketsAndUsers(org: Organization): Pair<Set<Ticket>, Set<User>> {
+    fun getAssociatedTicketsAndUsers(orgId: String): Pair<Set<Ticket>, Set<User>> {
+        val org = findById(orgId)!!
         val associatedTickets = tickets.filter { ticket -> ticket.organization_id == org._id }.toMutableSet()
         val associatedUsers = users.filter { user -> user.organization_id == org._id }.toMutableSet()
         return Pair(associatedTickets, associatedUsers)
+    }
+
+    @Throws(OrganizationSearchError::class)
+    fun findById(id: String): Organization? {
+        val org: Organization?
+        try {
+            org = organizations.findLast { o -> o._id == id.toInt() }
+        } catch (e: Exception) {
+            throw OrganizationSearchError(e)
+        }
+        return org
     }
 
     private fun <T> executeSearch(field: KProperty1<Organization, *>, fieldValue: T): List<Organization> {

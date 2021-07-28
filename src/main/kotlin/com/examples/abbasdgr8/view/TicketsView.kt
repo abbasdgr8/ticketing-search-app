@@ -2,8 +2,8 @@ package com.examples.abbasdgr8.view
 
 import com.examples.abbasdgr8.model.domain.Ticket
 import com.examples.abbasdgr8.view.ViewCommons.Companion.getFieldsWithBanner
-import com.examples.abbasdgr8.view.ViewCommons.Companion.getRecordsWithBanner
 import com.examples.abbasdgr8.view.ViewCommons.Companion.getScreen
+import com.examples.abbasdgr8.view.ViewCommons.Companion.getSearchResults
 
 class TicketsView {
 
@@ -17,8 +17,8 @@ class TicketsView {
             return getFieldsWithBanner(fields, ticketsFieldsBanner)
         }
 
-        fun getTicketRecord(tickets: List<Ticket>): String {
-            return getRecordsWithBanner(tickets)
+        fun getSearchResults(tickets: List<Ticket>): String {
+            return getSearchResults(tickets, "Ticket")
         }
 
         private val ticketsMenu = getScreen("tickets-menu")

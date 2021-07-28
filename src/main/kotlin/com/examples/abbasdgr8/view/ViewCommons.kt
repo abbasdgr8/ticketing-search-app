@@ -1,7 +1,7 @@
 package com.examples.abbasdgr8.view
 
 import java.io.File
-import java.lang.StringBuilder
+import kotlin.text.StringBuilder
 
 class ViewCommons {
 
@@ -22,17 +22,10 @@ class ViewCommons {
             return banner + sb.toString()
         }
 
-        fun <T> getRecordsWithBanner(records: List<T>): String {
+        fun <T> getSearchResults(records: List<T>, recordType: String, associationSearch: Boolean = false): String {
             val sb = StringBuilder()
-            records.forEach { record ->
-                sb.append(System.lineSeparator())
-                sb.append(record.toString())
-                sb.append(System.lineSeparator())
-            }
-            sb.append(System.lineSeparator())
-            sb.append("Found ${records.size} result(s)")
-            sb.append(System.lineSeparator())
-
+            sb.append(getSearchedRecords(records))
+            sb.append(getSearchResultSummary(records.size, recordType, associationSearch))
             return sb.toString()
         }
 
@@ -44,9 +37,36 @@ class ViewCommons {
             return fieldValueErrorMsg
         }
 
+        fun getAssocationsErrorMsg(): String {
+            return assocationsErrorMsg
+        }
+
+        private fun <T> getSearchedRecords(records: List<T>): String {
+            val sb = StringBuilder()
+            records.forEach { record ->
+                sb.append(System.lineSeparator())
+                sb.append(record.toString())
+                sb.append(System.lineSeparator())
+            }
+            return sb.toString()
+        }
+
+        private fun getSearchResultSummary(count: Int, recordType: String, associationSearch: Boolean = false): String {
+            val sb = StringBuilder()
+            sb.append(System.lineSeparator())
+            if (associationSearch) {
+                sb.append("Found $count associated $recordType(s)")
+            } else {
+                sb.append("Found $count matching $recordType(s)")
+            }
+            sb.append(System.lineSeparator())
+            return sb.toString()
+        }
+
         private const val SCREENS_DIR_PATH = "src/main/resources/screens"
 
         private val fieldNameErrorMsg = getScreen("field-name-error")
         private val fieldValueErrorMsg = getScreen("field-value-error")
+        private val assocationsErrorMsg = getScreen("assocations-error")
     }
 }

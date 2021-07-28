@@ -141,19 +141,71 @@ class UserSearchServiceTests: Spek({
 
     Feature("Get associated Org") {
 
-        val user = InputDataDeserializer().readUsers(File("src/test/resources/json/valid/users.json"))[0]
+        val userId = InputDataDeserializer().readUsers(File("src/test/resources/json/valid/users.json"))[0]._id
 
         Scenario("For a valid, existing, and associated User object") {
 
             lateinit var associatedOrg: Organization
 
             When("Associations are queried") {
-                associatedOrg = service.getAssociatedOrg(user)!!
+                associatedOrg = service.getAssociatedOrg(userId.toString())
             }
 
             Then("the correct associated org is returned") {
                 associatedOrg.shouldNotBeNull()
                 associatedOrg._id shouldBeEqualTo 119
+            }
+        }
+    }
+
+
+    Feature("findById") {
+
+        Scenario("Searching using an id that is valid and belongs to a User record") {
+
+            val userId = 1
+            lateinit var user: User
+
+            When("findById() using an valid and existing id gets invoked") {
+                user = service.findById(userId.toString())!!
+            }
+
+            Then("A single user record is returned") {
+                user.shouldNotBeNull()
+                user._id shouldBeEqualTo userId
+            }
+        }
+
+        Scenario("Searching using an id that is valid but does not belong to any User record") {
+
+            val userId = -1
+            var user: User? = null
+
+            When("findById() using an valid but non-existent id gets invoked") {
+                user = service.findById(userId.toString())
+            }
+
+            Then("A UserSearchError gets thrown") {
+                user.shouldBeNull()
+            }
+        }
+
+        Scenario("Searching using an id that is invalid") {
+
+            lateinit var exception: Exception
+
+            When("findById() using an invalid id gets invoked") {
+                try{
+                    service.findById("not an integer")
+                } catch (e: Exception) {
+                    exception = e
+                }
+            }
+
+            Then("A UserSearchError gets thrown") {
+                exception.shouldNotBeNull()
+                exception shouldBeInstanceOf UserSearchError::class
+                exception.cause shouldBeInstanceOf NumberFormatException::class
             }
         }
     }

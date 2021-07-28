@@ -50,6 +50,9 @@ class AppStateMachine {
                 transitionTo(CliState.UserSearchFieldInput)
             }
             on<UserEvent.OptionThree> {
+                transitionTo(CliState.UserAssocationsIdInput)
+            }
+            on<UserEvent.OptionFour> {
                 transitionTo(CliState.MainMenu)
             }
         }
@@ -113,7 +116,7 @@ class AppStateMachine {
 
         state<CliState.TicketSearchValueInput> {
             on<UserEvent.InputSearchValue> {
-                transitionTo(CliState.TicketRecord)
+                transitionTo(CliState.TicketsSearchResult)
             }
             on<UserEvent.Error> {
                 transitionTo(CliState.TicketSearchFieldValueError)
@@ -122,7 +125,7 @@ class AppStateMachine {
 
         state<CliState.UserSearchValueInput> {
             on<UserEvent.InputSearchValue> {
-                transitionTo(CliState.UserRecord)
+                transitionTo(CliState.UsersSearchResult)
             }
             on<UserEvent.Error> {
                 transitionTo(CliState.UserSearchFieldValueError)
@@ -131,10 +134,19 @@ class AppStateMachine {
 
         state<CliState.OrgSearchValueInput> {
             on<UserEvent.InputSearchValue> {
-                transitionTo(CliState.OrgRecord)
+                transitionTo(CliState.OrgsSearchResult)
             }
             on<UserEvent.Error> {
                 transitionTo(CliState.OrgSearchFieldValueError)
+            }
+        }
+
+        state<CliState.UserAssocationsIdInput> {
+            on<UserEvent.InputSearchValue> {
+                transitionTo(CliState.UserAssociationsResult)
+            }
+            on<UserEvent.Error> {
+                transitionTo(CliState.UserAssocationsError)
             }
         }
 
@@ -174,21 +186,33 @@ class AppStateMachine {
             }
         }
 
-        state<CliState.TicketRecord> {
-            on<UserEvent.Proceed> {
-                transitionTo(CliState.TicketsMenu)
-            }
-        }
-
-        state<CliState.UserRecord> {
+        state<CliState.UserAssocationsError> {
             on<UserEvent.Proceed> {
                 transitionTo(CliState.UsersMenu)
             }
         }
 
-        state<CliState.OrgRecord> {
+        state<CliState.TicketsSearchResult> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.TicketsMenu)
+            }
+        }
+
+        state<CliState.UsersSearchResult> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.UsersMenu)
+            }
+        }
+
+        state<CliState.OrgsSearchResult> {
             on<UserEvent.Proceed> {
                 transitionTo(CliState.OrgsMenu)
+            }
+        }
+
+        state<CliState.UserAssociationsResult> {
+            on<UserEvent.Proceed> {
+                transitionTo(CliState.UsersMenu)
             }
         }
 

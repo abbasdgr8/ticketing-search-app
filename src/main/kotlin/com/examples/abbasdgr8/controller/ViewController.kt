@@ -31,24 +31,24 @@ class ViewController(ticketSearchService: TicketSearchService,
 
                 TicketsMenu -> return Interaction(TicketsView.getTicketsMenu(), Prompts.CHOOSE.text, showDefault = false)
                 TicketFields -> return Interaction(TicketsView.getTicketsFields(ticketSearchService.getAllSearchableFieldNames()), showPrompt = false)
-                TicketRecord -> return Interaction(TicketsView.getTicketRecord(ticketSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
-                TicketSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.PREVIOUS.text)
-                TicketSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)
+                TicketsSearchResult -> return Interaction(TicketsView.getSearchResults(ticketSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
 
                 UsersMenu -> return Interaction(UsersView.getUsersMenu(), Prompts.CHOOSE.text, showDefault = false)
                 UserFields -> return Interaction(UsersView.getUsersFields(userSearchService.getAllSearchableFieldNames()), showPrompt = false)
-                UserRecord -> return Interaction(UsersView.getUserRecord(userSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
-                UserSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.PREVIOUS.text)
-                UserSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)
+                UsersSearchResult -> return Interaction(UsersView.getSearchResults(userSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
+                UserAssociationsResult -> return Interaction(UsersView.getAssociationResults(userSearchService.findById(searchFieldValue), userSearchService.getAssociatedOrg(searchFieldValue)), showPrompt = false)
 
                 OrgsMenu -> return Interaction(OrganizationsView.getOrganizationsMenu(), Prompts.CHOOSE.text, showDefault = false)
                 OrgFields -> return Interaction(OrganizationsView.getOrganizationsFields(orgSearchService.getAllSearchableFieldNames()), showPrompt = false)
-                OrgRecord -> return Interaction(OrganizationsView.getOrganizationRecord(orgSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
-                OrgSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.PREVIOUS.text)
-                OrgSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)
+                OrgsSearchResult -> return Interaction(OrganizationsView.getSearchResults(orgSearchService.findByField(searchFieldName, searchFieldValue)), showPrompt = false)
 
                 TicketSearchFieldInput, UserSearchFieldInput, OrgSearchFieldInput -> return Interaction(prompt = Prompts.FIELD_NAME.text, showDefault = false)
                 TicketSearchValueInput, UserSearchValueInput, OrgSearchValueInput -> return Interaction(prompt = Prompts.FIELD_VALUE.text, default = EMPTY.s)
+                UserAssocationsIdInput -> return Interaction(prompt = Prompts.ID_VALUE.text, default = EMPTY.s)
+
+                TicketSearchFieldNameError, UserSearchFieldNameError, OrgSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.PREVIOUS.text)
+                TicketSearchFieldValueError, UserSearchFieldValueError, OrgSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)
+                UserAssocationsError -> return Interaction(ViewCommons.getAssocationsErrorMsg(), Prompts.PREVIOUS.text)
             }
         } catch (e: Exception) {
             return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)

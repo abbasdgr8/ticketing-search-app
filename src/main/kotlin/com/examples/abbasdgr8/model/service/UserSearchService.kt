@@ -30,8 +30,20 @@ class UserSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
-    fun getAssociatedOrg(user: User): Organization? {
-        return organizations.find { org -> org._id == user.organization_id }
+    fun getAssociatedOrg(userId: String): Organization {
+        val user = findById(userId)!!
+        return organizations.find { org -> org._id == user.organization_id }!!
+    }
+
+    @Throws(UserSearchError::class)
+    fun findById(id: String): User? {
+        val user: User?
+        try {
+            user = users.findLast { u -> u._id == id.toInt() }
+        } catch (e: Exception) {
+            throw UserSearchError(e)
+        }
+        return user
     }
 
     private fun <T> executeSearch(field: KProperty1<User, *>, fieldValue: T): List<User> {

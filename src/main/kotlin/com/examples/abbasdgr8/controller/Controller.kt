@@ -38,10 +38,27 @@ open class Controller(protected val ticketSearchService: TicketSearchService,
                 searchFieldValue = input
                 stateMachine.transition(UserEvent.InputSearchValue)
             }
-            TicketRecord, UserRecord, OrgRecord -> stateMachine.transition(UserEvent.Proceed)
+            UserAssocationsIdInput -> {
+                if (isRecordWithIdPresent(input)) {
+                    searchFieldValue = input
+                    stateMachine.transition(UserEvent.InputSearchValue)
+                } else {
+                    stateMachine.transition(UserEvent.Error)
+                }
+            }
+            TicketsSearchResult, UsersSearchResult, OrgsSearchResult,
+            UserAssociationsResult -> stateMachine.transition(UserEvent.Proceed)
             TicketSearchFieldNameError, UserSearchFieldNameError, OrgSearchFieldNameError -> stateMachine.transition(UserEvent.Proceed)
-            TicketSearchFieldValueError, UserSearchFieldValueError, OrgSearchFieldValueError -> stateMachine.transition(UserEvent.Proceed)
+            TicketSearchFieldValueError, UserSearchFieldValueError, OrgSearchFieldValueError,
+            UserAssocationsError -> stateMachine.transition(UserEvent.Proceed)
             End -> exitProcess(0)
+        }
+    }
+
+    private fun isRecordWithIdPresent(input: String): Boolean {
+        return when (stateMachine.state) {
+            UserAssocationsIdInput -> userSearchService.findById(input) != null
+            else -> false
         }
     }
 

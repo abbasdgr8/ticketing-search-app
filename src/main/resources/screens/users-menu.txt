@@ -6,6 +6,7 @@
 |-------------------------------------------------------|
 | Enter 1 to view all Searchable fields on Users        |
 | Enter 2 to search                                     |
-| Enter 3 to go to back to the Main Menu                |
+| Enter 3 to search associations
+| Enter 4 to go to back to the Main Menu                |
 | ------------------------------------------------------|
 

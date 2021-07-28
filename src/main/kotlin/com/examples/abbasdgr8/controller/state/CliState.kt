@@ -1,8 +1,8 @@
 package com.examples.abbasdgr8.controller.state
 
 /**
- * This class represents the different view states that the
- * user experiences through their interaction with the CLI app
+ * This class represents the different states that the user
+ * experiences throughout their interaction with this app
  */
 sealed class CliState {
 
@@ -16,7 +16,7 @@ sealed class CliState {
     object TicketSearchFieldNameError: CliState()
     object TicketSearchValueInput: CliState()
     object TicketSearchFieldValueError: CliState()
-    object TicketRecord: CliState()
+    object TicketsSearchResult: CliState()
 
     object UsersMenu: CliState()
     object UserFields: CliState()
@@ -24,7 +24,10 @@ sealed class CliState {
     object UserSearchFieldNameError: CliState()
     object UserSearchValueInput: CliState()
     object UserSearchFieldValueError: CliState()
-    object UserRecord: CliState()
+    object UsersSearchResult: CliState()
+    object UserAssocationsIdInput: CliState()
+    object UserAssocationsError: CliState()
+    object UserAssociationsResult: CliState()
 
     object OrgsMenu: CliState()
     object OrgFields: CliState()
@@ -32,5 +35,5 @@ sealed class CliState {
     object OrgSearchFieldNameError: CliState()
     object OrgSearchValueInput: CliState()
     object OrgSearchFieldValueError: CliState()
-    object OrgRecord: CliState()
+    object OrgsSearchResult: CliState()
 }

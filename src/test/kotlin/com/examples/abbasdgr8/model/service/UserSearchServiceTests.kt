@@ -1,10 +1,13 @@
 package com.examples.abbasdgr8.model.service
 
+import com.examples.abbasdgr8.model.data.InputDataDeserializer
+import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.UserSearchError
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
+import java.io.File
 import java.lang.Exception
 import java.util.*
 
@@ -132,9 +135,27 @@ class UserSearchServiceTests: Spek({
             Then("all correct searchable fields are returned") {
                 searchableFields shouldBeEqualTo expectedFields
             }
-
         }
+    }
 
+
+    Feature("Get associated Org") {
+
+        val user = InputDataDeserializer().readUsers(File("src/test/resources/json/valid/users.json"))[0]
+
+        Scenario("For a valid, existing, and associated User object") {
+
+            lateinit var associatedOrg: Organization
+
+            When("Associations are queried") {
+                associatedOrg = service.getAssociatedOrg(user)!!
+            }
+
+            Then("the correct associated org is returned") {
+                associatedOrg.shouldNotBeNull()
+                associatedOrg._id shouldBeEqualTo 119
+            }
+        }
     }
 
 })

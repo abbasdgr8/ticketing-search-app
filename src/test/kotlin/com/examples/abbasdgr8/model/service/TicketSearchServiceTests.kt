@@ -1,7 +1,9 @@
 package com.examples.abbasdgr8.model.service
 
 import com.examples.abbasdgr8.model.data.InputDataDeserializer
+import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.domain.Ticket
+import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.TicketSearchError
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
@@ -169,9 +171,35 @@ class TicketSearchServiceTests: Spek({
             Then("all correct searchable fields are returned") {
                 searchableFields shouldBeEqualTo expectedFields
             }
-
         }
+    }
 
+
+    Feature("Get associated Org & Users") {
+
+        val ticket = InputDataDeserializer().readTickets(File("src/test/resources/json/valid/tickets.json"))[0]
+
+        Scenario("For a valid, existing, and associated Ticket object") {
+
+            lateinit var associatedOrgAndUsers: Pair<Organization?, Set<User>>
+
+            When("Associations are queried") {
+                associatedOrgAndUsers = service.getAssociatedOrgAndUsers(ticket)
+            }
+
+            Then("the correct associated org and users are returned") {
+                associatedOrgAndUsers.shouldNotBeNull()
+
+                val associatedOrg = associatedOrgAndUsers.first
+                associatedOrg.shouldNotBeNull()
+                associatedOrg._id shouldBeEqualTo 116
+
+                val associatedUsers = associatedOrgAndUsers.second
+                associatedUsers.shouldNotBeNull()
+                associatedUsers.shouldNotBeEmpty()
+                associatedUsers.size shouldBeEqualTo 2
+            }
+        }
     }
 
 })

@@ -2,6 +2,8 @@ package com.examples.abbasdgr8.model.service
 
 import com.examples.abbasdgr8.model.data.InputDataDeserializer
 import com.examples.abbasdgr8.model.domain.Organization
+import com.examples.abbasdgr8.model.domain.Ticket
+import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.OrganizationSearchError
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
@@ -135,4 +137,33 @@ class OrganizationSearchServiceTests: Spek({
 
     }
 
+
+    Feature("Get associated Tickets & Users") {
+
+        val org = InputDataDeserializer()
+            .readOrganizations(File("src/test/resources/json/valid/organizations.json"))[0]
+
+        Scenario("For a valid, existing, and associated Organization object") {
+
+            lateinit var associatedTicketsAndUsers: Pair<Set<Ticket>, Set<User>>
+
+            When("Associations are queried") {
+                associatedTicketsAndUsers = service.getAssociatedTicketsAndUsers(org)
+            }
+
+            Then("all the correct associated tickets and users are returned") {
+                associatedTicketsAndUsers.shouldNotBeNull()
+
+                val associatedTickets = associatedTicketsAndUsers.first
+                associatedTickets.shouldNotBeNull()
+                associatedTickets.shouldNotBeEmpty()
+                associatedTickets.size shouldBeEqualTo 4
+
+                val associatedUsers = associatedTicketsAndUsers.second
+                associatedUsers.shouldNotBeNull()
+                associatedUsers.shouldNotBeEmpty()
+                associatedUsers.size shouldBeEqualTo 4
+            }
+        }
+    }
 })

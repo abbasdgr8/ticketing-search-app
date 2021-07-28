@@ -1,8 +1,9 @@
 package com.examples.abbasdgr8.model.service
 
+import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.UserSearchError
-import com.examples.abbasdgr8.view.constants.Inputs
+import com.examples.abbasdgr8.view.constants.Inputs.EMPTY
 import java.lang.Exception
 import java.util.*
 import kotlin.reflect.KProperty1
@@ -29,13 +30,17 @@ class UserSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
+    fun getAssociatedOrg(user: User): Organization? {
+        return organizations.find { org -> org._id == user.organization_id }
+    }
+
     private fun <T> executeSearch(field: KProperty1<User, *>, fieldValue: T): List<User> {
         val searchText = fieldValue.toString()
         return when(field.returnType.toString()) {
-            "kotlin.Int" -> executeIntegerSearch(field, if (searchText == Inputs.EMPTY.s) Int.MIN_VALUE else searchText.toInt())
+            "kotlin.Int" -> executeIntegerSearch(field, if (searchText == EMPTY.s) Int.MIN_VALUE else searchText.toInt())
             "kotlin.String" -> executeTextSearch(field, searchText)
             "java.util.Date" -> executeDateSearch(field, Date())
-            "kotlin.Boolean" -> executeBooleanSearch(field, if (searchText == Inputs.EMPTY.s) true else searchText.toBoolean())
+            "kotlin.Boolean" -> executeBooleanSearch(field, if (searchText == EMPTY.s) true else searchText.toBoolean())
             else -> listOf()
         }
     }

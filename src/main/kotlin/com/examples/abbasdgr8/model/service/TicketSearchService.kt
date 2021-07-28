@@ -1,6 +1,8 @@
 package com.examples.abbasdgr8.model.service
 
+import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.domain.Ticket
+import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.TicketSearchError
 import com.examples.abbasdgr8.view.constants.Inputs.EMPTY
 import java.lang.Exception
@@ -27,6 +29,15 @@ class TicketSearchService : SearchService() {
 
     fun getAllSearchableFieldNames(): List<String> {
         return super.getAllSearchableFieldNames(searchableFields)
+    }
+
+    fun getAssociatedOrgAndUsers(ticket: Ticket): Pair<Organization?, MutableSet<User>> {
+        val associatedOrg = organizations.find { org -> org._id == ticket.organization_id }
+        val associatedUsers = users.filter {
+                user -> ticket.assignee_id == user._id ||
+                ticket.submitter_id == user._id
+        }.toMutableSet()
+        return Pair(associatedOrg, associatedUsers)
     }
 
     private fun <T> executeSearch(field: KProperty1<Ticket, *>, fieldValue: T): List<Ticket> {

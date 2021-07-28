@@ -4,7 +4,7 @@ import com.examples.abbasdgr8.controller.state.CliState.*
 import com.examples.abbasdgr8.model.service.OrganizationSearchService
 import com.examples.abbasdgr8.model.service.TicketSearchService
 import com.examples.abbasdgr8.model.service.UserSearchService
-import com.examples.abbasdgr8.model.user.Interaction
+import com.examples.abbasdgr8.model.cli.Interaction
 import com.examples.abbasdgr8.view.*
 import com.examples.abbasdgr8.view.constants.Inputs.EMPTY
 import com.examples.abbasdgr8.view.constants.Prompts
@@ -47,8 +47,8 @@ class ViewController(ticketSearchService: TicketSearchService,
                 OrgSearchFieldNameError -> return Interaction(ViewCommons.getFieldNameErrorMsg(), Prompts.PREVIOUS.text)
                 OrgSearchFieldValueError -> return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)
 
-                TicketSearchFieldInput, UserSearchFieldInput, OrgSearchFieldInput -> return Interaction(prompt = ViewCommons.getFieldNamePrompt(), showDefault = false)
-                TicketSearchValueInput, UserSearchValueInput, OrgSearchValueInput -> return Interaction(prompt = ViewCommons.getFieldValuePrompt(), default = EMPTY.s)
+                TicketSearchFieldInput, UserSearchFieldInput, OrgSearchFieldInput -> return Interaction(prompt = Prompts.FIELD_NAME.text, showDefault = false)
+                TicketSearchValueInput, UserSearchValueInput, OrgSearchValueInput -> return Interaction(prompt = Prompts.FIELD_VALUE.text, default = EMPTY.s)
             }
         } catch (e: Exception) {
             return Interaction(ViewCommons.getFieldValueErrorMsg(), Prompts.PREVIOUS.text)

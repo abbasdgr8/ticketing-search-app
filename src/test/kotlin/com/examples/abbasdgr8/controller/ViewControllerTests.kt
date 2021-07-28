@@ -7,6 +7,7 @@ import com.examples.abbasdgr8.model.service.UserSearchService
 import com.examples.abbasdgr8.view.IndexView
 import com.examples.abbasdgr8.view.TicketsView
 import com.examples.abbasdgr8.view.ViewCommons
+import com.examples.abbasdgr8.view.constants.Prompts
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -100,7 +101,7 @@ class ViewControllerTests: Spek ({
             }
 
             Then("prompt matches search fields") {
-                prompt shouldBeEqualTo ViewCommons.getFieldNamePrompt()
+                prompt shouldBeEqualTo Prompts.FIELD_NAME.text
             }
         }
 
@@ -118,7 +119,7 @@ class ViewControllerTests: Spek ({
             }
 
             Then("view matches search fields") {
-                prompt shouldBeEqualTo ViewCommons.getFieldValuePrompt()
+                prompt shouldBeEqualTo Prompts.FIELD_VALUE.text
             }
         }
 

@@ -1,4 +1,4 @@
-package com.examples.abbasdgr8.model.user
+package com.examples.abbasdgr8.model.cli
 
 /**
  * Represents a single interaction with the user

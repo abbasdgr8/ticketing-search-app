@@ -11,10 +11,6 @@ class ViewCommons {
             return File("$SCREENS_DIR_PATH/$fileName.txt").readText()
         }
 
-        fun getPrompt(fileName: String): String {
-            return File("$PROMPTS_DIR_PATH/$fileName.txt").readText()
-        }
-
         fun getFieldsWithBanner(fields: List<String>, banner: String): String {
             val sb = StringBuilder()
             fields.forEach {field ->
@@ -40,14 +36,6 @@ class ViewCommons {
             return sb.toString()
         }
 
-        fun getFieldNamePrompt(): String {
-            return fieldNamePrompt
-        }
-
-        fun getFieldValuePrompt(): String {
-            return fieldValuePrompt
-        }
-
         fun getFieldNameErrorMsg(): String {
             return fieldNameErrorMsg
         }
@@ -57,10 +45,7 @@ class ViewCommons {
         }
 
         private const val SCREENS_DIR_PATH = "src/main/resources/screens"
-        private const val PROMPTS_DIR_PATH = "src/main/resources/prompts"
 
-        private val fieldNamePrompt = getPrompt("field-name-prompt")
-        private val fieldValuePrompt = getPrompt("field-value-prompt")
         private val fieldNameErrorMsg = getScreen("field-name-error")
         private val fieldValueErrorMsg = getScreen("field-value-error")
     }

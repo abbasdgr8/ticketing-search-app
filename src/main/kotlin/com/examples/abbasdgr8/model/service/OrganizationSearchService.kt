@@ -1,8 +1,10 @@
 package com.examples.abbasdgr8.model.service
 
 import com.examples.abbasdgr8.model.domain.Organization
+import com.examples.abbasdgr8.model.domain.Ticket
+import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.OrganizationSearchError
-import com.examples.abbasdgr8.view.constants.Inputs
+import com.examples.abbasdgr8.view.constants.Inputs.EMPTY
 import java.lang.Exception
 import java.util.*
 import kotlin.reflect.KProperty1
@@ -29,13 +31,19 @@ class OrganizationSearchService : SearchService() {
         return super.getAllSearchableFieldNames(searchableFields)
     }
 
+    fun getAssociatedTicketsAndUsers(org: Organization): Pair<Set<Ticket>, Set<User>> {
+        val associatedTickets = tickets.filter { ticket -> ticket.organization_id == org._id }.toMutableSet()
+        val associatedUsers = users.filter { user -> user.organization_id == org._id }.toMutableSet()
+        return Pair(associatedTickets, associatedUsers)
+    }
+
     private fun <T> executeSearch(field: KProperty1<Organization, *>, fieldValue: T): List<Organization> {
         val searchText = fieldValue.toString()
         return when(field.returnType.toString()) {
-            "kotlin.Int" -> executeIntegerSearch(field, if (searchText == Inputs.EMPTY.s) Int.MIN_VALUE else searchText.toInt())
+            "kotlin.Int" -> executeIntegerSearch(field, if (searchText == EMPTY.s) Int.MIN_VALUE else searchText.toInt())
             "kotlin.String" -> executeTextSearch(field, searchText)
             "java.util.Date" -> executeDateSearch(field, Date())
-            "kotlin.Boolean" -> executeBooleanSearch(field, if (searchText == Inputs.EMPTY.s) true else searchText.toBoolean())
+            "kotlin.Boolean" -> executeBooleanSearch(field, if (searchText == EMPTY.s) true else searchText.toBoolean())
             else -> listOf()
         }
     }

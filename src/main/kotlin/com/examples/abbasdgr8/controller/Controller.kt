@@ -56,12 +56,18 @@ open class Controller(protected val ticketSearchService: TicketSearchService,
     }
 
     private fun isRecordWithIdPresent(input: String): Boolean {
-        return when (stateMachine.state) {
-            TicketAssocationsIdInput -> ticketSearchService.findById(input) != null
-            UserAssocationsIdInput -> userSearchService.findById(input) != null
-            OrgAssocationsIdInput -> orgSearchService.findById(input) != null
-            else -> false
+        var isRecordPresent = false
+        try {
+            isRecordPresent = when (stateMachine.state) {
+                TicketAssocationsIdInput -> ticketSearchService.findById(input) != null
+                UserAssocationsIdInput -> userSearchService.findById(input) != null
+                OrgAssocationsIdInput -> orgSearchService.findById(input) != null
+                else -> false
+            }
+        } catch (e: Exception) {
+            stateMachine.transition(UserEvent.Error)
         }
+        return isRecordPresent
     }
 
     private fun isValidInputSearchField(input: String): Boolean {

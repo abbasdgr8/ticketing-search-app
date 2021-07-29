@@ -14,11 +14,11 @@ class ViewCommons {
         fun getFieldsWithBanner(fields: List<String>, banner: String): String {
             val sb = StringBuilder()
             fields.forEach {field ->
-                sb.append(System.lineSeparator())
+                lineBreak(sb)
                 sb.append(field)
             }
-            sb.append(System.lineSeparator())
-            sb.append(System.lineSeparator())
+            lineBreak(sb)
+            lineBreak(sb)
             return banner + sb.toString()
         }
 
@@ -41,25 +41,34 @@ class ViewCommons {
             return assocationsErrorMsg
         }
 
+        fun lineBreak(sb: StringBuilder) {
+            sb.append(System.lineSeparator())
+        }
+
+        fun horizontalRule(sb: StringBuilder) {
+            sb.append(horizontalRule)
+        }
+
         private fun <T> getSearchedRecords(records: List<T>): String {
             val sb = StringBuilder()
             records.forEach { record ->
-                sb.append(System.lineSeparator())
+                lineBreak(sb)
                 sb.append(record.toString())
-                sb.append(System.lineSeparator())
+                lineBreak(sb)
             }
             return sb.toString()
         }
 
-        private fun getSearchResultSummary(count: Int, recordType: String, associationSearch: Boolean = false): String {
+        private fun getSearchResultSummary(count: Int, recordType: String, isAssociationSearch: Boolean = false): String {
             val sb = StringBuilder()
-            sb.append(System.lineSeparator())
-            if (associationSearch) {
-                sb.append("Found $count associated $recordType(s)")
-            } else {
-                sb.append("Found $count matching $recordType(s)")
-            }
-            sb.append(System.lineSeparator())
+            val searchType: String = if (isAssociationSearch) "associated" else "matching"
+            lineBreak(sb)
+            horizontalRule(sb)
+            lineBreak(sb)
+            sb.append("Found $count $searchType $recordType(s)")
+            lineBreak(sb)
+            horizontalRule(sb)
+            lineBreak(sb)
             return sb.toString()
         }
 
@@ -68,5 +77,6 @@ class ViewCommons {
         private val fieldNameErrorMsg = getScreen("field-name-error")
         private val fieldValueErrorMsg = getScreen("field-value-error")
         private val assocationsErrorMsg = getScreen("assocations-error")
+        private val horizontalRule = getScreen("horizontal-rule")
     }
 }

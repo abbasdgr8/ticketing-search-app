@@ -69,13 +69,13 @@ class ViewControllerTests: Spek ({
             }
         }
 
-        Scenario("ViewController returns Tickets Menu on Option 1") {
+        Scenario("ViewController returns Tickets Menu on Option 3") {
 
             lateinit var userInput: String
             lateinit var view: String
 
-            Given("User Input => 1") {
-                userInput = "1"
+            Given("User Input => 3") {
+                userInput = "3"
             }
 
             When("processAction() is invoked") {

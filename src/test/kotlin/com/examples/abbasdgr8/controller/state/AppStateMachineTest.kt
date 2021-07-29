@@ -55,7 +55,7 @@ class AppStateMachineTest: Spek({
             }
 
             Then("Transitions to the TicketsMenu") {
-                stateMachine.state shouldBeEqualTo CliState.TicketsMenu
+                stateMachine.state shouldBeEqualTo CliState.OrgsMenu
             }
         }
 
@@ -91,7 +91,7 @@ class AppStateMachineTest: Spek({
             }
 
             Then("Transitions to the OrgsMenu") {
-                stateMachine.state shouldBeEqualTo CliState.OrgsMenu
+                stateMachine.state shouldBeEqualTo CliState.TicketsMenu
             }
         }
 

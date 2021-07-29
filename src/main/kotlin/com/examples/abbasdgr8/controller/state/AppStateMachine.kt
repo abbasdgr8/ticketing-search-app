@@ -17,13 +17,13 @@ class AppStateMachine {
 
         state<CliState.MainMenu> {
             on<UserEvent.OptionOne> {
-                transitionTo(CliState.TicketsMenu)
+                transitionTo(CliState.OrgsMenu)
             }
             on<UserEvent.OptionTwo> {
                 transitionTo(CliState.UsersMenu)
             }
             on<UserEvent.OptionThree> {
-                transitionTo(CliState.OrgsMenu)
+                transitionTo(CliState.TicketsMenu)
             }
             on<UserEvent.OptionFour> {
                 transitionTo(CliState.End)
@@ -38,7 +38,7 @@ class AppStateMachine {
                 transitionTo(CliState.TicketSearchFieldInput)
             }
             on<UserEvent.OptionThree> {
-                transitionTo(CliState.UserAssocationsIdInput)
+                transitionTo(CliState.TicketAssocationsIdInput)
             }
             on<UserEvent.OptionFour> {
                 transitionTo(CliState.MainMenu)
@@ -68,7 +68,7 @@ class AppStateMachine {
                 transitionTo(CliState.OrgSearchFieldInput)
             }
             on<UserEvent.OptionThree> {
-                transitionTo(CliState.UserAssocationsIdInput)
+                transitionTo(CliState.OrgAssocationsIdInput)
             }
             on<UserEvent.OptionFour> {
                 transitionTo(CliState.MainMenu)

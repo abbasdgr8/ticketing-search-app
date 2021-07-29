@@ -1,6 +1,6 @@
 package com.examples.abbasdgr8.model.service
 
-import com.examples.abbasdgr8.model.data.InputDataDeserializer
+import com.examples.abbasdgr8.model.data.InputJsonDeserializer
 import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.domain.Ticket
 import com.examples.abbasdgr8.model.domain.User
@@ -19,7 +19,7 @@ class OrganizationSearchServiceTests: Spek({
 
     Feature("Searching on _id") {
 
-        val expectedOrganization = InputDataDeserializer()
+        val expectedOrganization = InputJsonDeserializer()
                             .readOrganizations(File("src/test/resources/json/valid/organizations.json"))[0]
 
         Scenario("Searching on _id for a record that exists") {
@@ -140,7 +140,7 @@ class OrganizationSearchServiceTests: Spek({
 
     Feature("Get associated Tickets & Users") {
 
-        val orgId = InputDataDeserializer()
+        val orgId = InputJsonDeserializer()
             .readOrganizations(File("src/test/resources/json/valid/organizations.json"))[0]._id
 
         Scenario("For a valid, existing, and associated Organization object") {

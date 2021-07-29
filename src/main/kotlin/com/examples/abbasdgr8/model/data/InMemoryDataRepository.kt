@@ -25,7 +25,7 @@ class InMemoryDataRepository {
          * Indexing to be considered as an enhancement later to improve search response times
          */
         private fun loadDataIntoMemory() {
-            val deserializer = InputDataDeserializer()
+            val deserializer = InputJsonDeserializer()
 
             tickets = deserializer.readTickets(File("src/main/resources/input-data/tickets.json"))
             users = deserializer.readUsers(File("src/main/resources/input-data/users.json"))

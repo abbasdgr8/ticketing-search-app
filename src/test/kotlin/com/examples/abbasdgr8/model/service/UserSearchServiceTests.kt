@@ -1,6 +1,6 @@
 package com.examples.abbasdgr8.model.service
 
-import com.examples.abbasdgr8.model.data.InputDataDeserializer
+import com.examples.abbasdgr8.model.data.InputJsonDeserializer
 import com.examples.abbasdgr8.model.domain.Organization
 import com.examples.abbasdgr8.model.domain.User
 import com.examples.abbasdgr8.model.service.exceptions.UserSearchError
@@ -141,7 +141,7 @@ class UserSearchServiceTests: Spek({
 
     Feature("Get associated Org") {
 
-        val userId = InputDataDeserializer().readUsers(File("src/test/resources/json/valid/users.json"))[0]._id
+        val userId = InputJsonDeserializer().readUsers(File("src/test/resources/json/valid/users.json"))[0]._id
 
         Scenario("For a valid, existing, and associated User object") {
 

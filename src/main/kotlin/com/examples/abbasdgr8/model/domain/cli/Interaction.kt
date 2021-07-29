@@ -1,4 +1,4 @@
-package com.examples.abbasdgr8.model.cli
+package com.examples.abbasdgr8.model.domain.cli
 
 /**
  * Represents a single interaction with the user

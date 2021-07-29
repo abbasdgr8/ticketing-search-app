@@ -10,7 +10,7 @@ import java.io.File
 import java.lang.Exception
 
 
-class InputDataDeserializer {
+class InputJsonDeserializer {
 
     fun readTickets(ticketsJsonFile: File): List<Ticket> = deserializeJson(ticketsJsonFile)
     fun readUsers(usersJsonFile: File): List<User> = deserializeJson(usersJsonFile)

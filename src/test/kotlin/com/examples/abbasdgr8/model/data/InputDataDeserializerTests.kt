@@ -15,7 +15,7 @@ import java.util.*
 
 class InputDataDeserializerTests: Spek({
 
-    val deserializer = InputDataDeserializer()
+    val deserializer = InputJsonDeserializer()
 
     Feature("Read and deserialize tickets.json") {
 

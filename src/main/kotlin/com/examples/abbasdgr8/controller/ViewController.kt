@@ -4,7 +4,7 @@ import com.examples.abbasdgr8.controller.state.CliState.*
 import com.examples.abbasdgr8.model.service.OrganizationSearchService
 import com.examples.abbasdgr8.model.service.TicketSearchService
 import com.examples.abbasdgr8.model.service.UserSearchService
-import com.examples.abbasdgr8.model.cli.Interaction
+import com.examples.abbasdgr8.model.domain.cli.Interaction
 import com.examples.abbasdgr8.view.*
 import com.examples.abbasdgr8.view.constants.Inputs.EMPTY
 import com.examples.abbasdgr8.view.constants.Prompts
